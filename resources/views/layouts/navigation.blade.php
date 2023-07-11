@@ -16,7 +16,7 @@
                         {{ __('Licenças') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('cadastro-licencas')" :active="request()->routeIs('cadastro-licencas')">
                         {{ __('Cadastro Licenças') }}
                     </x-nav-link>
                 </div>

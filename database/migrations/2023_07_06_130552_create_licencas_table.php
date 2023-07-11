@@ -18,8 +18,7 @@ return new class extends Migration
             $table->foreignId('id_tipo')->constrained('tipo');
             $table->foreignId('id_situacao')->constrained('situacao');
             $table->foreignId('id_bacia')->constrained('bacia_hidrografica');
-            $table->foreignId('id_condicionantes')->constrained('condicionantes');
-
+            
 
             $table->string('empreendimento');
             $table->decimal('latitude', 10, 8);
@@ -27,12 +26,12 @@ return new class extends Migration
             $table->string('num_processo');
             $table->date('data_concessao');
             $table->date('data_vencimento');
-            $table->int('validade');
+            $table->integer('validade');
             $table->boolean('vigencia');
             $table->date('prazo_renovacao');
             $table->string('observacao');
             $table->string('interessado');
-            $table->int('doc_sei');
+            $table->integer('doc_sei');
             $table->string('processo');
             $table->timestamps();
         });

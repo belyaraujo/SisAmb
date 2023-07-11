@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LicencasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [LicencasController::class, 'index'])->middleware(['auth', 'verified'])
+->name('dashboard');
+
+Route::get('/cadastro', function () {
+    return view('cadastro-licencas');
+})->middleware(['auth', 'verified'])->name('cadastro-licencas');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
