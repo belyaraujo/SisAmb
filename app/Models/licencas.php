@@ -4,8 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Regiao_administrativa;
+use App\Models\Bacia_hidrografica;
+use App\Models\Situacao;
+use App\Models\Tipo_empreendimento;
+use App\Models\Tipo;
 
-class licencas extends Model
+class Licencas extends Model
 {
     use HasFactory;
     protected $table = 'licencas';
@@ -20,15 +25,39 @@ class licencas extends Model
         'latitude',
         'longitude',
         'num_processo',
-        'ano',
         'data_concessao',
         'data_vencimento',
         'validade',
-        'periodo_vigencia',
-        'prazo_renovacao',
+        'vigencia',
+        // 'prazo_renovacao',
         'observacao',
         'interessado',
         'doc_sei',
-        'processo'
+        // 'processo'
     ];
+
+    public function regiao_adm(){
+
+        return $this->belongsTo(Regiao_administrativa::class, 'id_ra' , 'id');
+    }
+
+    public function bacia(){
+
+        return $this->belongsTo(Bacia_hidrografica::class, 'id_bacia' , 'id');
+    }
+
+    public function situacao(){
+
+        return $this->belongsTo(Situacao::class, 'id_situacao' , 'id');
+    }
+
+    public function empreendimento(){
+
+        return $this->belongsTo(Tipo_empreendimento::class, 'id_empreendimento' , 'id');
+    }
+
+    public function tipo(){
+
+        return $this->belongsTo(Tipo::class, 'id_tipo' , 'id');
+    }
 }

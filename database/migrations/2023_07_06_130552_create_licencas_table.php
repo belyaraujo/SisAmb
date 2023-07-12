@@ -22,17 +22,16 @@ return new class extends Migration
 
             $table->string('empreendimento');
             $table->decimal('latitude', 10, 8);
-            $table->decimal('longetude', 11, 8);
+            $table->decimal('longitude', 11, 8);
             $table->string('num_processo');
             $table->date('data_concessao');
             $table->date('data_vencimento');
-            $table->integer('validade');
-            $table->boolean('vigencia');
-            $table->date('prazo_renovacao');
+            $table->integer('validade')->nullable();
+            $table->boolean('vigencia')->nullable();
+            $table->date('prazo_renovacao')->nullable();
             $table->string('observacao');
             $table->string('interessado');
             $table->integer('doc_sei');
-            $table->string('processo');
             $table->timestamps();
         });
     }

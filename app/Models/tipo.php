@@ -5,10 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipo extends Model
+class Tipo extends Model
 {
     use HasFactory;
     protected $table = 'tipo';
 
     protected $fillable = ['sigla', 'descricao'];
+
+    public function licencas(){
+
+        return $this->hasMany(Licencas::class);
+    }
 }

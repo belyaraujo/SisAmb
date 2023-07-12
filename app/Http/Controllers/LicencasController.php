@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Regiao_administrativa;
+use App\Models\Bacia_hidrografica;
+use App\Models\Situacao;
+use App\Models\Tipo_empreendimento;
+use App\Models\Tipo;
+use App\Models\Licencas;
+
 
 class LicencasController extends Controller
 {
@@ -11,31 +18,90 @@ class LicencasController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $licencas = Licencas::get();
+        return view('dashboard', ['licencas' => $licencas]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $licencas = new Licencas();
+        $licencas->id_ra = $request->input('id_ra');
+        $licencas->id_bacia = $request->input('id_bacia');
+        $licencas->id_situacao = $request->input('id_situacao');
+        $licencas->id_empreendimento = $request->input('id_empreendimento');
+        $licencas->id_tipo = $request->input('id_tipo');
+        $licencas->latitude = $request->input('latitude');
+        $licencas->longitude = $request->input('longitude');
+        $licencas->empreendimento = $request->input('empreendimento');
+        // $licencas->processo = $request->input('processo');
+        $licencas->doc_sei = $request->input('doc_sei');
+        $licencas->num_processo = $request->input('num_processo');
+        $licencas->data_concessao = $request->input('dataconcessao');
+        $licencas->data_vencimento = $request->input('data_vencimento');
+        $licencas->observacao = $request->input('observacao');
+        $licencas->interessado = $request->input('interessado');
+        // $licencas->validade = $request->input('validade');
+        // $licencas->vigencia = $request->input('vigencia');
+        // $licencas->processo = $request->input('processo');
+        $licencas->save();
+        return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
+
     }
+    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_ra' => 'required',
+            'id_bacia' => 'required',
+            'id_situacao' => 'required',
+            'id_empreendimento' => 'required',
+            'id_tipo' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'empreendimento' => 'required',
+            'processo' => 'required',
+            'doc_sei' => 'required',
+            'num_processo' => 'required',
+            'data_concessao' => 'required',
+            'data_vencimento' => 'required',
+            'observacao' => 'required',
+            'interessado' => 'required',
+            // 'validade' => 'required',
+            // 'vigencia' => 'required',
+            // 'processo' => 'required',
+           
+        ]);
+
+        Licencas::create($request->all());
+
+        return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        $regiao = Regiao_administrativa::get();
+        $bacia = Bacia_hidrografica::get();
+        $situacao = Situacao::get();
+        $tipo_empre = Tipo_empreendimento::get();
+        $tipo = Tipo::get();
+       
+        return view('cadastro-licencas', [
+            'regiao' => $regiao, 
+            'bacia' => $bacia,
+            'situacao' => $situacao,
+            'tipo_empre' => $tipo_empre,
+            'tipo' => $tipo,
+        ]);
     }
 
     /**
