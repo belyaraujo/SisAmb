@@ -29,22 +29,22 @@ class LicencasController extends Controller
     {
         $licencas = new Licencas();
         $licencas->id_ra = $request->input('id_ra');
-        $licencas->id_bacia = $request->input('id_bacia');
+        // $licencas->id_bacia = $request->input('id_bacia');
         $licencas->id_situacao = $request->input('id_situacao');
         $licencas->id_empreendimento = $request->input('id_empreendimento');
         $licencas->id_tipo = $request->input('id_tipo');
         $licencas->latitude = $request->input('latitude');
         $licencas->longitude = $request->input('longitude');
         $licencas->empreendimento = $request->input('empreendimento');
-        // $licencas->processo = $request->input('processo');
-        $licencas->doc_sei = $request->input('doc_sei');
         $licencas->num_processo = $request->input('num_processo');
+        $licencas->doc_sei = $request->input('doc_sei');
+        $licencas->numero = $request->input('numero');
         $licencas->data_concessao = $request->input('dataconcessao');
-        $licencas->data_vencimento = $request->input('data_vencimento');
+        $licencas->validade = $request->input('validade');
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
         // $licencas->validade = $request->input('validade');
-        // $licencas->vigencia = $request->input('vigencia');
+        $licencas->vigencia = $request->input('vigencia');
         // $licencas->processo = $request->input('processo');
         $licencas->save();
         return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
@@ -59,7 +59,7 @@ class LicencasController extends Controller
     {
         $request->validate([
             'id_ra' => 'required',
-            'id_bacia' => 'required',
+            // 'id_bacia' => 'required',
             'id_situacao' => 'required',
             'id_empreendimento' => 'required',
             'id_tipo' => 'required',
@@ -74,7 +74,7 @@ class LicencasController extends Controller
             'observacao' => 'required',
             'interessado' => 'required',
             // 'validade' => 'required',
-            // 'vigencia' => 'required',
+             'vigencia' => 'required',
             // 'processo' => 'required',
            
         ]);

@@ -51,7 +51,7 @@ class Licencas extends Model
         return $this->belongsTo(Situacao::class, 'id_situacao' , 'id');
     }
 
-    public function empreendimento(){
+    public function tipo_empreendimento(){
 
         return $this->belongsTo(Tipo_empreendimento::class, 'id_empreendimento' , 'id');
     }

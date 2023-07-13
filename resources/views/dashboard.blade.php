@@ -16,27 +16,45 @@
                                     <tr>
                                         
                                         <div class="p-2 bg-white border-b border-gray-200">
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Arquivo</th>    
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Arquivo</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Número do processo</th>    
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Região Adm</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Tipo empreendimento</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Tipo</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Situação</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Ações</th>
                                             </tr>
                                         </thead>
                                                 <tbody class="divide-y divide-gray-100">
-                                                   
+                                                    @foreach ($licencas as $licen)
                                                     <tr class="bg-gray-100">
-                        
+                                                        
+                                                            
+                                                       
                                                         <th class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="">oi</span>
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->num_processo}}</span>
                                                         </th>
                         
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="" href="#">ola</span>
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->regiao_adm->nome}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->tipo_empreendimento->tipo}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->tipo->sigla}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->situacao->situacao}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value=""></span>
                                                         </td>
                         
-                        
+                                                        
                         
                         
                                                     </tr>
-                        
+                                                    @endforeach
         
                                 </table>
                         </div>

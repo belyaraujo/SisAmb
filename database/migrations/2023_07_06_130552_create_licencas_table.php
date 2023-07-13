@@ -17,21 +17,23 @@ return new class extends Migration
             $table->foreignId('id_empreendimento')->constrained('tipo_empreendimento');
             $table->foreignId('id_tipo')->constrained('tipo');
             $table->foreignId('id_situacao')->constrained('situacao');
-            $table->foreignId('id_bacia')->constrained('bacia_hidrografica');
+            //$table->foreignId('id_bacia')->constrained('bacia_hidrografica');
             
 
             $table->string('empreendimento');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
+            $table->float('latitude');
+            $table->float('longitude');
             $table->string('num_processo');
+            $table->integer('doc_sei');
+            $table->integer('numero');
             $table->date('data_concessao');
-            $table->date('data_vencimento');
-            $table->integer('validade')->nullable();
-            $table->boolean('vigencia')->nullable();
+            $table->date('data_vencimento')->nullable();
+            $table->integer('validade');
+            $table->boolean('vigencia');
             $table->date('prazo_renovacao')->nullable();
             $table->string('observacao');
             $table->string('interessado');
-            $table->integer('doc_sei');
+            
             $table->timestamps();
         });
     }

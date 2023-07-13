@@ -13,7 +13,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-<<<<<<< HEAD
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="max-w-xl">
                         <div style="margin: 0 0 0 20px; flex-basis: 102px;">
@@ -63,14 +62,14 @@
                                 </select>
 
                                 {{-- Bacia Hidrográfica --}}
-                                <select
+                                {{-- <select
                                     class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                                     name="id_bacia" id="id_bacia">
                                     <option>Bacia</option>
                                     @foreach ($bacia as $bacia)
                                         <option value="{{ $bacia->id }}">{{ $bacia->bacia }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
 
                                 {{-- Latitude --}}
                                 <x-input-label :value="__('Latitude')" />
@@ -89,8 +88,8 @@
                             </div>
 
                             {{-- Número do processo --}}
-                            {{-- <x-input-label :value="__('Número do processo')" />
-                            <x-text-input id="processo" name="processo" type="text" class="mt-1 block" /> --}}
+                            <x-input-label :value="__('Número do processo')" />
+                            <x-text-input id="num_processo" name="num_processo" type="text" class="mt-1 block" />
 
                             {{-- Documento SEI --}}
                             <x-input-label :value="__('Documento SEI')" />
@@ -98,7 +97,7 @@
 
                             {{-- Número --}}
                             <x-input-label :value="__('Número')" />
-                            <x-text-input id="num_processo" name="num_processo" type="number" class="mt-1 block" />
+                            <x-text-input id="numero" name="numero" type="number" class="mt-1 block" />
 
                             {{-- Data de concessão --}}
                             <x-input-label :value="__('Data de concessão')" />
@@ -109,15 +108,25 @@
                                 <i class="fas fa-calendar input-prefix"></i>
                             </div>
                             
-                            {{-- Data de vencimento --}}
-                            <x-input-label :value="__('Data de vencimento')" />
-                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
+                            {{-- Validade --}}
+                            <x-input-label :value="__('Validade')" />
+                            {{-- <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
                                 inline="true">
                                 <input placeholder="Select date" type="date" id="data_vencimento" name="data_vencimento"
                                     class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md">
                                 <i class="fas fa-calendar input-prefix"></i>
-                            </div>
+                            </div> --}}
+                            <x-text-input id="validade" name="validade" type="number" class="mt-1 block" />
 
+                            {{-- Vigência --}}
+                            <x-input-label :value="__('Vigência')" />
+                            <select
+                                class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
+                                name="vigencia" id="vigencia">
+                                <option value="1">Vigente</option>
+                                <option value="0">Não vigente</option>
+
+                            </select>
 
                             {{-- Observação --}}
                             <x-input-label :value="__('Observação')" />
@@ -142,8 +151,8 @@
 
                     </div>
                 </div>
-=======
-                <div class="form-container">
+
+                {{-- <div class="form-container">
                     <form>
                       <div class="form-row">
                         <label for="numero">Número:</label>
@@ -238,8 +247,8 @@
                         <input type="submit" value="Enviar">
                       </div>
                     </form>
-                  </div>
->>>>>>> f7d678c516d969149f14a06b57d5b642091d6d27
+                  </div> --}}
+
 
             </div>
         </div>
