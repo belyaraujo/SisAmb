@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.form-container {
+    max-width: 1000px; /* Ajuste a largura conforme necessário */
+    margin: 10em auto;
+    padding: 50px;
+    /* background-color: #bdbbbb; */
+    border-radius: 4px;
+    /* box-shadow: 0 2px 5px 5px grey;
+    border-radius: 25px; */
+  }
+
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .form-row label {
+    font-weight: bold;
+    margin-right: 10px;
+    flex-basis: 140px;
+  }
+
+  .form-row input,
+  .form-row select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .form-row input[type="submit"] {
+    background-color: #4285f4;
+    color: white;
+    cursor: pointer;
+  }
+
+  .form-row input[type="submit"]:hover {
+    background-color: #3367d6;
+  }
+
+  span {
+    margin: 0 5px;
+  }
