@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="p-5 bg-sky-600 shadow dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="p-3 bg-sky-600 shadow dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 p-5">
         <div class="flex justify-between h-2">
@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-8 sm:flex">
                     <x-nav-link class="text-white text-xl pb-4" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Licenças') }}
                     </x-nav-link>
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden sm:flex sm:items-center sm:ml-10">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

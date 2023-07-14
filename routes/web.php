@@ -27,6 +27,9 @@ Route::get('/dashboard', [LicencasController::class, 'index'])->middleware(['aut
 
 Route::get('/cadastro', [LicencasController::class, 'show'])->middleware(['auth', 'verified'])->name('cadastro-licencas');
 Route::post('/cadastro-licencas', [LicencasController::class, 'create'])->name('cadastro');
+Route::get('/licencas', function () {
+    return view('licencas');
+});
 
 
 Route::middleware('auth')->group(function () {
