@@ -14,7 +14,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <div class="max-w-xl">
+                    
                         <div style="margin: 0 0 0 20px; flex-basis: 102px;">
                             <form action="{{ route('cadastro') }}" method="POST">
                                 @csrf
@@ -149,7 +149,7 @@
                         </div>
                     </form>
 
-                    </div>
+                  
                 </div>
 
                 {{-- <div class="form-container">

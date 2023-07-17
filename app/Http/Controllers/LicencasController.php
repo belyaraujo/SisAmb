@@ -104,6 +104,14 @@ class LicencasController extends Controller
         ]);
     }
 
+    public function licencas($id){
+        //$licencas = Licencas::find($id)->get();
+        $licencas = Licencas::where('id', $id)->get();
+        
+        return view('licencas')->with('licencas', $licencas);
+        //return view('licencas', ['licencas'=> $licencas]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

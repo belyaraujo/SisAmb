@@ -49,7 +49,7 @@
                                                             <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->situacao->situacao}}</span>
                                                         </td>
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <a class="btn btn-outline-primary" href="/licencas" role="button">Visualizar</a>
+                                                            <a class="btn btn-outline-primary" href={{"licencas/" .$licen['id']}} role="button">Visualizar</a>
                                                         </td>
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <a class="btn btn-info" href="" role="button">Editar</a>
