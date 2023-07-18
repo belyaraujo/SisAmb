@@ -9,6 +9,7 @@ use App\Models\Situacao;
 use App\Models\Tipo_empreendimento;
 use App\Models\Tipo;
 use App\Models\Licencas;
+use App\Models\Vigencia;
 
 
 class LicencasController extends Controller
@@ -29,12 +30,10 @@ class LicencasController extends Controller
     {
         $licencas = new Licencas();
         $licencas->id_ra = $request->input('id_ra');
-        // $licencas->id_bacia = $request->input('id_bacia');
         $licencas->id_situacao = $request->input('id_situacao');
         $licencas->id_empreendimento = $request->input('id_empreendimento');
         $licencas->id_tipo = $request->input('id_tipo');
-        $licencas->latitude = $request->input('latitude');
-        $licencas->longitude = $request->input('longitude');
+        $licencas->id_vigencia = $request->input('id_vigencia');
         $licencas->empreendimento = $request->input('empreendimento');
         $licencas->num_processo = $request->input('num_processo');
         $licencas->doc_sei = $request->input('doc_sei');
@@ -44,8 +43,11 @@ class LicencasController extends Controller
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
         // $licencas->validade = $request->input('validade');
-        $licencas->vigencia = $request->input('vigencia');
+       
         // $licencas->processo = $request->input('processo');
+        // $licencas->id_bacia = $request->input('id_bacia');
+        // $licencas->latitude = $request->input('latitude');
+        // $licencas->longitude = $request->input('longitude');
         $licencas->save();
         return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
 
@@ -59,12 +61,10 @@ class LicencasController extends Controller
     {
         $request->validate([
             'id_ra' => 'required',
-            // 'id_bacia' => 'required',
             'id_situacao' => 'required',
             'id_empreendimento' => 'required',
             'id_tipo' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
+            'id_vigencia' => 'required',
             'empreendimento' => 'required',
             'processo' => 'required',
             'doc_sei' => 'required',
@@ -73,9 +73,12 @@ class LicencasController extends Controller
             'data_vencimento' => 'required',
             'observacao' => 'required',
             'interessado' => 'required',
+            
             // 'validade' => 'required',
-             'vigencia' => 'required',
+            // 'id_bacia' => 'required',
             // 'processo' => 'required',
+            // 'latitude' => 'required',
+            // 'longitude' => 'required',
            
         ]);
 
@@ -94,6 +97,7 @@ class LicencasController extends Controller
         $situacao = Situacao::get();
         $tipo_empre = Tipo_empreendimento::get();
         $tipo = Tipo::get();
+        $vigencia = Vigencia::get();
        
         return view('cadastro-licencas', [
             'regiao' => $regiao, 
@@ -101,15 +105,16 @@ class LicencasController extends Controller
             'situacao' => $situacao,
             'tipo_empre' => $tipo_empre,
             'tipo' => $tipo,
+            'vigencia' => $vigencia,
         ]);
     }
 
     public function licencas($id){
-        //$licencas = Licencas::find($id)->get();
-        $licencas = Licencas::where('id', $id)->get();
+        $licencas = Licencas::where('id','=', $id)->get();
+        //$licencas = Licencas::where('id', $id)->get();
         
-        return view('licencas')->with('licencas', $licencas);
-        //return view('licencas', ['licencas'=> $licencas]);
+        //return view('licencas')->with('licencas', $licencas);
+        return view('licencas', ['licencas'=> $licencas]);
     }
 
     /**

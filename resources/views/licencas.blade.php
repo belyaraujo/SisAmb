@@ -1,7 +1,9 @@
 <x-app-layout>
+    @foreach ($licencas as $licencas)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Licença-número') }}
+            {{ __('Licencas - ') . $licencas->num_processo }}
+
         </h2>
     </x-slot>
 
@@ -12,65 +14,69 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 
-                   
-                    <form class="row g-3">
-                        <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas}}">
+                  
+                       
+                  
+                    <form class="row g-3" action="{{ route('licencas-view', $licencas->id) }}">
+                        
+                        <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->id}}">
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Número do processo</label>
-                            <input type="text" class="form-control" disabled id="inputEmail4" value="">
+                            <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->num_processo}}">
                         </div>
 
                           <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Documento SEI</label>
-                            <input type="text" class="form-control" disabled id="inputEmail4" value="">
+                            <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->doc_sei}}">
                           </div>
 
                           <div class="col-md-2">
                             <label for="inputEmail4" class="form-label">Número</label>
-                            <input type="text" class="form-control" disabled id="inputEmail4" value="">
+                            <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->numero}}">
                           </div>
 
                           <div class="col-md-2">
                             <label for="inputZip" class="form-label">Tipo</label>
-                            <input type="text" class="form-control" disabled id="inputZip">
+                            <input type="text" class="form-control" disabled id="inputZip" value="{{$licencas->tipo->sigla}}">
                           </div>
                         <div class="col-md-6">
                           <label for="inputEmail4" class="form-label">Região Administrativa</label>
-                          <input type="text" class="form-control" disabled id="inputEmail4" value="">
+                          <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->regiao_adm->nome}}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Tipo de empreendimento</label>
-                            <input type="text" class="form-control" disabled id="inputEmail4" value="">
+                            <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->tipo_empreendimento->tipo}}">
                         </div>
 
                         <div class="col-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Empreendimento</label>
-                            <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="4"></textarea>
+                            <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="4" value="{{$licencas->empreendimento}}">{{$licencas->empreendimento}}</textarea>
                         </div>
 
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">Data de Concessão</label>
-                            <input type="text" class="form-control" disabled id="inputCity">
+                            <input type="text" class="form-control" disabled id="inputCity" value="{{date('d/m/Y', strtotime($licencas->data_concessao))}}">
                           </div>
                           <div class="col-md-6">
                               <label for="inputCity" class="form-label">Data de vencimento</label>
-                              <input type="text" class="form-control" disabled id="inputCity">
+                              <input type="text" class="form-control" disabled id="inputCity" value="{{$licencas->data_vencimento}}">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Vigência</label>
-                                <input type="text" class="form-control" disabled id="inputCity">
+                                <input type="text" class="form-control" disabled id="inputCity" value="{{$licencas->vigencia->vigencia}}">
                               </div>
                               <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Interessado</label>
-                                <input type="text" class="form-control" disabled id="inputCity">
+                                <input type="text" class="form-control" disabled id="inputCity" value="{{$licencas->interessado}}">
                               </div>
 
                         <div class="col-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Observação</label>
-                            <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="4"></textarea>
+                            <textarea class="form-control" disabled id="exampleFormControlTextarea1"  value="{{$licencas->observacao}}">{{$licencas->observacao}}</textarea>
                         </div>
+                        
                       </form>
-                      
+                      @endforeach
                 
             </div>
 

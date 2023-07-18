@@ -9,6 +9,7 @@ use App\Models\Bacia_hidrografica;
 use App\Models\Situacao;
 use App\Models\Tipo_empreendimento;
 use App\Models\Tipo;
+use App\Models\vigencia;
 
 class Licencas extends Model
 {
@@ -20,20 +21,20 @@ class Licencas extends Model
         'id_empreendimento',
         'id_tipo', 
         'id_situacao',
-        'id_bacia',
+        'id_vigencia',
         'empreendimento',
-        'latitude',
-        'longitude',
         'num_processo',
         'data_concessao',
         'data_vencimento',
         'validade',
-        'vigencia',
-        // 'prazo_renovacao',
         'observacao',
         'interessado',
         'doc_sei',
         // 'processo'
+        // 'latitude',
+        // 'longitude',
+        // 'id_bacia',
+        // 'prazo_renovacao',
     ];
 
     public function regiao_adm(){
@@ -59,5 +60,10 @@ class Licencas extends Model
     public function tipo(){
 
         return $this->belongsTo(Tipo::class, 'id_tipo' , 'id');
+    }
+
+    public function vigencia(){
+
+        return $this->belongsTo(vigencia::class, 'id_vigencia' , 'id');
     }
 }
