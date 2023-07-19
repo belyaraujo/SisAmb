@@ -39,13 +39,18 @@
                             <label for="inputZip" class="form-label">Tipo</label>
                             <input type="text" class="form-control" disabled id="inputZip" value="{{$licencas->tipo->sigla}}">
                           </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <label for="inputEmail4" class="form-label">Região Administrativa</label>
                           <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->regiao_adm->nome}}">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Tipo de empreendimento</label>
                             <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->tipo_empreendimento->tipo}}">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="inputEmail4" class="form-label">Situação</label>
+                            <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->situacao->situacao}}">
                         </div>
 
                         <div class="col-12">
@@ -86,7 +91,7 @@
                         {{ __('Condicionantes') }}
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-primary">Adicionar Condicionante</button>
+                            <a class="btn btn-primary" href="/cadastro-condicionantes" role="button">Adicionar Condicionante</a>
                         </div>
                     </p>
                     <table class="table table-hover w-full">

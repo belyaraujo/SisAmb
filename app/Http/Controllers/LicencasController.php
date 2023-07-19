@@ -42,13 +42,15 @@ class LicencasController extends Controller
         $licencas->validade = $request->input('validade');
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
+        $licencas->save();
+
         // $licencas->validade = $request->input('validade');
        
         // $licencas->processo = $request->input('processo');
         // $licencas->id_bacia = $request->input('id_bacia');
         // $licencas->latitude = $request->input('latitude');
         // $licencas->longitude = $request->input('longitude');
-        $licencas->save();
+        
         return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
 
     }
@@ -122,7 +124,25 @@ class LicencasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $licencas = Licencas::where('id','=', $id)->get();
+        $regiao = Regiao_administrativa::get();
+        $bacia = Bacia_hidrografica::get();
+        $situacao = Situacao::get();
+        $tipo_empre = Tipo_empreendimento::get();
+        $tipo = Tipo::get();
+        $vigencia = Vigencia::get();
+
+    
+        return view('update-licencas', [
+            'licencas'=> $licencas,
+            'regiao' => $regiao, 
+            'bacia' => $bacia,
+            'situacao' => $situacao,
+            'tipo_empre' => $tipo_empre,
+            'tipo' => $tipo,
+            'vigencia' => $vigencia,
+        
+        ]);
     }
 
     /**
@@ -130,7 +150,23 @@ class LicencasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $licencas = Licencas::find($id);
+        $licencas->id_ra = $request->input('id_ra');
+        $licencas->id_situacao = $request->input('id_situacao');
+        $licencas->id_empreendimento = $request->input('id_empreendimento');
+        $licencas->id_tipo = $request->input('id_tipo');
+        $licencas->id_vigencia = $request->input('id_vigencia');
+        $licencas->empreendimento = $request->input('empreendimento');
+        $licencas->num_processo = $request->input('num_processo');
+        $licencas->doc_sei = $request->input('doc_sei');
+        $licencas->numero = $request->input('numero');
+        $licencas->data_concessao = $request->input('dataconcessao');
+        $licencas->validade = $request->input('validade');
+        $licencas->observacao = $request->input('observacao');
+        $licencas->interessado = $request->input('interessado');
+        $licencas->update();
+
+        return redirect()->route('dashboard')->with('success', 'Editado excluído com sucesso.');
     }
 
     /**

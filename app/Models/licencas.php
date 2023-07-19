@@ -10,6 +10,7 @@ use App\Models\Situacao;
 use App\Models\Tipo_empreendimento;
 use App\Models\Tipo;
 use App\Models\vigencia;
+use App\Models\condicionantes;
 
 class Licencas extends Model
 {
@@ -65,5 +66,10 @@ class Licencas extends Model
     public function vigencia(){
 
         return $this->belongsTo(vigencia::class, 'id_vigencia' , 'id');
+    }
+
+    public function condicionantes(){
+
+        return $this->hasMany(condicionantes::class);
     }
 }
