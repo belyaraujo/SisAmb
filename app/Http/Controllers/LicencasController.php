@@ -10,6 +10,9 @@ use App\Models\Tipo_empreendimento;
 use App\Models\Tipo;
 use App\Models\Licencas;
 use App\Models\Vigencia;
+use App\Models\Condicionantes;
+use Carbon\Carbon;
+
 
 
 class LicencasController extends Controller
@@ -40,6 +43,9 @@ class LicencasController extends Controller
         $licencas->numero = $request->input('numero');
         $licencas->data_concessao = $request->input('dataconcessao');
         $licencas->validade = $request->input('validade');
+        $licencas->data_vencimento = Carbon::parse($request->input('data_concessao'))->addYears($licencas->validade);
+    
+
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
         $licencas->save();
@@ -113,10 +119,9 @@ class LicencasController extends Controller
 
     public function licencas($id){
         $licencas = Licencas::where('id','=', $id)->get();
-        //$licencas = Licencas::where('id', $id)->get();
-        
-        //return view('licencas')->with('licencas', $licencas);
-        return view('licencas', ['licencas'=> $licencas]);
+        $licenca = Licencas::find($id);
+        $condicionantes = Condicionantes::where('id_licencas', '=', $id)->get();
+        return view('licencas', ['licencas'=> $licencas, 'condicionantes'=> $condicionantes]);
     }
 
     /**
@@ -162,6 +167,7 @@ class LicencasController extends Controller
         $licencas->numero = $request->input('numero');
         $licencas->data_concessao = $request->input('dataconcessao');
         $licencas->validade = $request->input('validade');
+        $licencas->data_vencimento = Carbon::parse($request->input('data_concessao'))->addYears($licencas->validade);
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
         $licencas->update();

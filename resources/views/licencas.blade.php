@@ -2,7 +2,7 @@
     @foreach ($licencas as $licencas)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Licencas - ') . $licencas->num_processo }}
+            {{ __('Licença - ') . $licencas->num_processo }}
 
         </h2>
     </x-slot>
@@ -64,7 +64,7 @@
                           </div>
                           <div class="col-md-6">
                               <label for="inputCity" class="form-label">Data de vencimento</label>
-                              <input type="text" class="form-control" disabled id="inputCity" value="{{$licencas->data_vencimento}}">
+                              <input type="text" class="form-control" disabled id="inputCity" value="{{date('d/m/Y', strtotime($licencas->data_vencimento))}}">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Vigência</label>
@@ -79,7 +79,7 @@
                             <label for="exampleFormControlTextarea1" class="form-label">Observação</label>
                             <textarea class="form-control" disabled id="exampleFormControlTextarea1"  value="{{$licencas->observacao}}">{{$licencas->observacao}}</textarea>
                         </div>
-                        
+                       
                       </form>
                       @endforeach
                 
@@ -91,8 +91,10 @@
                         {{ __('Condicionantes') }}
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-primary" href="/cadastro-condicionantes" role="button">Adicionar Condicionante</a>
+                            <a class="btn btn-primary" href={{"cadastro-condicionantes/" .$licencas['id']}} role="button">Adicionar Condicionante</a>
                         </div>
+
+                        
                     </p>
                     <table class="table table-hover w-full">
                         <thead class="table-primary bg-gray-50 border-b-2 border-gray-200" style="background-color: 	#cae8f5;">
@@ -104,31 +106,21 @@
                                     </tr>
                                 </thead>
                                         <tbody class="divide-y divide-gray-100">
-                                            
+                                            @foreach($condicionantes as $cond)
+
                                             <tr class="bg-gray-100">
-                                               
                                                 <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                    <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="">Condicionante teste</span>
+                                                    <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$cond->id}}">{{$cond->condicionante}}</span>
                                                 </td>
 
                                                 <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                    <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="">00/00/0000</span>
+                                                    <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$cond->id}}">{{date('d/m/Y', strtotime($cond->prazo_condicionante))}}</span>
                                                 </td>
-                
-                
                                             </tr>
-                                            <tr class="bg-gray-100">
-                                               
-                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                    <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="">Condicionante teste 2</span>
-                                                </td>
 
-                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                    <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="">00/00/0000</span>
-                                                </td>
-                
-                
-                                            </tr>
+                                            @endforeach
+                                        </tbody>                                
+                               
                                             
 
                         </table>

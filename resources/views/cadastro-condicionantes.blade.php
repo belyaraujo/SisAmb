@@ -1,4 +1,5 @@
 <x-app-layout>
+  @foreach ($licencas as $licencas)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Adicionar condicionante') }}
@@ -15,11 +16,11 @@
               <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                   
                      
-                <form action="{{ route('cadastro-condicionantes') }}" method="POST" class="row g-3">
+                <form action="{{ url('cadastro-condicionantes/' . $licencas->id) }}" method="POST" class="row g-3">
                   @csrf
 
-                  {{-- <input type="text" class="form-control" id="inputEmail4" value="{{ $licencas->id }}"> --}}
-               
+                  <input type="text" class="form-control" id="id_licenca" name="id_licenca" value="{{ $licencas->id }}">
+                  @endforeach
                   <div class="col-12">
                     <label for="exampleFormControlTextarea1" class="form-label">Condicionante</label>
                     <div class="form-floating ">
@@ -32,7 +33,7 @@
                     <label for="inputCity" class="form-label">Prazo da condicionante</label>
                     <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
                       inline="true">
-                      <input placeholder="Select date" type="date" id="prazo_condionante" name="prazo_condionante"
+                      <input placeholder="Select date" type="date" id="prazo_condicionante" name="prazo_condicionante"
                           class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md">
                       <i class="fas fa-calendar input-prefix"></i>
                   </div>
@@ -48,4 +49,5 @@
 
           </div>
       </div>
+      
 </x-app-layout>

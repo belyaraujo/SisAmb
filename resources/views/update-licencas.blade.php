@@ -2,7 +2,7 @@
     @foreach ($licencas as $licencas)
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Editar Licencas - ') . $licencas->num_processo }}
+                {{ __('Editar Licença - ') . $licencas->num_processo }}
 
             </h2>
         </x-slot>
@@ -18,7 +18,7 @@
 
 
 
-                    <form class="row g-3" method="POST" action="{{ url('licenca.update/' . $licencas->id) }}">
+                    <form class="row g-3" method="POST" action="{{ url('licenca-update/' . $licencas->id) }}">
                         @csrf
                         <input type="text" class="form-control" id="inputEmail4" value="{{ $licencas->id }}">
                         {{--Número do processo--}}

@@ -29,10 +29,10 @@ Route::get('/dashboard', [LicencasController::class, 'index'])->middleware(['aut
 Route::get('/cadastro', [LicencasController::class, 'show'])->middleware(['auth', 'verified'])->name('cadastro-licencas');
 Route::post('/cadastro-licencas', [LicencasController::class, 'create'])->name('cadastro');
 Route::get('/licencas/{id}', [LicencasController::class, 'licencas'])->name('licencas-view');
-Route::get('/licenca.update/{id}', [LicencasController::class, 'edit'])->name('licencas-update');
-Route::post('/licenca.update/{id}', [LicencasController::class, 'update'])->name('licencas-update');
-Route::get('/cadastro-condicionantes', [CondicionanteController::class, 'index'])->name('cadastro-condicionantes');
-Route::post('/cadastro-condicionantes', [CondicionanteController::class, 'create'])->name('cadastro-condicionantes');
+Route::get('/licenca-update/{id}', [LicencasController::class, 'edit'])->name('licencas-update');
+Route::post('/licenca-update/{id}', [LicencasController::class, 'update'])->name('licencas-update');
+Route::get('/cadastro-condicionantes/{id}', [CondicionanteController::class, 'index'])->name('cadastro-condicionantes');
+Route::post('/cadastro-condicionantes/{id}', [CondicionanteController::class, 'create'])->name('cadastro-condicionantes');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

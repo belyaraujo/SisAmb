@@ -52,7 +52,7 @@
                                                             <a class="btn btn-outline-primary" href={{"licencas/" .$licen['id']}} role="button">Visualizar</a>
                                                         </td>
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <a class="btn btn-info" href={{"licenca.update/" .$licen['id']}} role="button">Editar</a>
+                                                            <a class="btn btn-info" href={{"licenca-update/" .$licen['id']}} role="button">Editar</a>
                                                         </td>
                         
                                                         

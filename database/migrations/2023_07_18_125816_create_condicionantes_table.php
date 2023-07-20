@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('condicionantes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_licencas')->constrained('licencas');
-            $table->string('condicionante');
-            $table->date('prazo_condionante');
+            $table->string('condicionante')->nullable();
+            $table->date('prazo_condicionante')->nullable();
             $table->timestamps();
         });
     }

@@ -11,23 +11,28 @@ class CondicionanteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        return view('cadastro-condicionantes');
+        $licencas = Licencas::where('id','=', $id)->get();
+        return view('cadastro-condicionantes', ['licencas'=> $licencas]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        $id = Licencas::find($request->id_licenca);
+        $licencas = Licencas::find($request->id_licenca);
         $condicionantes = new Condicionantes();
-        $condicionantes->id_licenca = $request->input('id_licenca');
+    
+        $condicionantes->id_licencas = $request->input('id_licenca');
         $condicionantes->condicionante = $request->input('condicionante');
-        $condicionantes->prazo_condionante = $request->input('prazo_condionante');
+        $condicionantes->prazo_condicionante = $request->input('prazo_condicionante');
         $condicionantes->save();
 
-        return redirect()->route('licencas-view')->with('msg','Criado com sucesso!');
+         return redirect()->route('licencas-view', ['id' => $licencas->id])->with('msg','Criado com sucesso!');
+        
     }
 
     /**
@@ -39,7 +44,7 @@ class CondicionanteController extends Controller
         $request->validate([
             'id_licenca' => 'required',
             'condicionante' => 'required',
-            'prazo_condionante' => 'required',
+            'prazo_condicionante' => 'required',
             
         
         ]);
