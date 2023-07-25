@@ -28,7 +28,7 @@
                             </div>
   
                             <div class="col-md-2">
-                              <label for="inputEmail4" class="form-label">Número</label>
+                              <label for="inputEmail4" class="form-label">Número da Licença</label>
                               <input type="number" class="form-control" id="numero" name="numero" value="">
                             </div>
   
@@ -101,14 +101,14 @@
                                 <input id="validade" name="validade" type="number" class="form-control"/>
                               </div>
 
-                              <div class="col-md-6">
+                              {{-- <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Data de vencimento </label>
                                 <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
                                   inline="true">
                                   <input placeholder="Select date" type="date" id="datavencimento" name="datavencimento"
                                       class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md">
                                   <i class="fas fa-calendar input-prefix"></i>
-                              </div>
+                              </div> --}}
 
                               <div class="col-md-6">
                                   <label for="inputCity" class="form-label">Vigência</label>

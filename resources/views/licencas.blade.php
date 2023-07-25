@@ -31,7 +31,7 @@
                           </div>
 
                           <div class="col-md-2">
-                            <label for="inputEmail4" class="form-label">Número</label>
+                            <label for="inputEmail4" class="form-label">Número da Licença</label>
                             <input type="text" class="form-control" disabled id="inputEmail4" value="{{$licencas->numero}}">
                           </div>
 

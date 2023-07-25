@@ -75,14 +75,14 @@ class LicencasController extends Controller
             'id_vigencia' => 'required',
             'empreendimento' => 'required',
             'processo' => 'required',
-            'doc_sei' => 'required',
-            'num_processo' => 'required',
+            'doc_sei' => 'required|max:8|regex:/^[0-9]*$/',
+            'num_processo' => 'required|regex:/^[0-9]*$/',
             'data_concessao' => 'required',
             'data_vencimento' => 'required',
             'observacao' => 'required',
             'interessado' => 'required',
-            
-            // 'validade' => 'required',
+            'validade' => 'required|regex:/\d+/|min:1',
+
             // 'id_bacia' => 'required',
             // 'processo' => 'required',
             // 'latitude' => 'required',

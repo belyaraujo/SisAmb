@@ -18,12 +18,12 @@
                                     <tr>
                                         
                                         <div class="p-2 bg-white border-b border-gray-200">
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Número</th>    
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Região Adm</th>
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Tipo empreendimento</th>
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Tipo</th>
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Situação</th>
-                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Ações</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Tipo</th>    
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Número da Licença</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Ano</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Empreendimento</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">RA</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Vigência</th>
                                             </tr>
                                         </thead>
                                                 <tbody class="divide-y divide-gray-100">
@@ -33,28 +33,29 @@
                                                             
                                                        
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->num_processo}}</span>
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->tipo->sigla}}</span>
                                                         </td>
                         
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->numero}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{date('Y', strtotime($licen->data_concessao))}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->empreendimento}}</span>
+                                                        </td>
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->regiao_adm->nome}}</span>
                                                         </td>
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->tipo_empreendimento->tipo}}</span>
-                                                        </td>
-                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->tipo->sigla}}</span>
-                                                        </td>
-                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->situacao->situacao}}</span>
-                                                        </td>
-                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <a class="btn btn-outline-primary" href={{"licencas/" .$licen['id']}} role="button">Visualizar</a>
                                                         </td>
+                                                        @if(Auth::check() && Auth::user()->admin == 1)
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <a class="btn btn-info" href={{"licenca-update/" .$licen['id']}} role="button">Editar</a>
                                                         </td>
-                        
+                                                        @endif
                                                         
                         
                         

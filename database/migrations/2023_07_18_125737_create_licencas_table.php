@@ -24,8 +24,8 @@ return new class extends Migration
            
 
 
-            $table->string('empreendimento');
-            // $table->float('latitude');
+            $table->longtext('empreendimento');
+            // $table->float('latitude');, 
             // $table->float('longitude');
             $table->string('num_processo');
             $table->integer('doc_sei');
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->date('data_vencimento')->nullable();
             $table->integer('validade');
             $table->date('prazo_renovacao')->nullable();
-            $table->string('observacao');
+            $table->longtext('observacao');
             $table->string('interessado');
            
             $table->timestamps();
