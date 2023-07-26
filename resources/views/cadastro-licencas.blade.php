@@ -137,7 +137,11 @@
                                 <textarea class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
                                     placeholder="Observação" id="observacao" name="observacao"></textarea>
                             </div>
-                            <x-primary-button>{{ __('Salvar') }}</x-primary-button>
+                            <div class="flex items-center justify-center mt-4">
+                              <x-primary-button>{{ __('Salvar') }}</x-primary-button>
+                            </div>
+                            
+                            
                           </div>
                           
                         </form>

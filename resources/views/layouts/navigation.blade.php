@@ -16,12 +16,19 @@
                         {{ __('Licenças') }}
                     </x-nav-link>
 
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link class="text-white text-xl pb-4" :href="route('cadastro-licencas')" :active="request()->routeIs('cadastro-licencas')">
-                        {{ __('Cadastro Licenças') }}
+                    
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link class="text-white text-xl pb-4" :href="route('cadastro-licencas')" :active="request()->routeIs('cadastro-licencas')">
+                    {{ __('Cadastrar Licenças') }}
                     </x-nav-link>
                 </div>
-            </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link class="text-white text-xl pb-4" :href="route('cadastro-user')" :active="request()->routeIs('cadastro-user')">
+                        {{ __('Cadastrar Usuário') }}
+                    </x-nav-link>
+                </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-10">

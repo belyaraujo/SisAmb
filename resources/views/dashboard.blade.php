@@ -24,6 +24,8 @@
                                             <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Empreendimento</th>
                                             <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">RA</th>
                                             <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Vigência</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Prazo de renovação</th>
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left" scope="col">Ações</th>
                                             </tr>
                                         </thead>
                                                 <tbody class="divide-y divide-gray-100">
@@ -42,8 +44,8 @@
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{date('Y', strtotime($licen->data_concessao))}}</span>
                                                         </td>
-                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->empreendimento}}</span>
+                                                        <td class="p-3 text-sm text-gray-700 w-50">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50 cont" value="{{$licen->id}}">{{$licen->empreendimento}}</span>
                                                         </td>
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->regiao_adm->nome}}</span>

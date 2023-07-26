@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LicencasController;
 use App\Http\Controllers\CondicionanteController;
+use App\Http\Controllers\CadastroUsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,11 @@ use App\Http\Controllers\CondicionanteController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/cadastro-user',  [CadastroUsuarioController::class, 'index'])
+->name('cadastro-user');
+Route::post('/cadastro-user',  [CadastroUsuarioController::class, 'store'])
+->name('cadastro-user');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
