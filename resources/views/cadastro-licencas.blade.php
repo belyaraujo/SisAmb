@@ -15,7 +15,7 @@
               <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                   
                      
-                <form action="{{ route('cadastro') }}" method="POST" class="row g-3">
+                <form action="{{ route('cadastro') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                   @csrf
                           <div class="col-md-4">
                               <label for="inputEmail4" class="form-label">Número do processo</label>
@@ -37,7 +37,7 @@
                               <select
                                     class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                                     name="id_tipo" id="id_tipo">
-                                    <option>Tipo</option>
+                                    <option value="NULL" disabled selected>Selecione um tipo...</option>
                                     @foreach ($tipo as $tipo)
                                         <option value="{{ $tipo->id }}">{{ $tipo->sigla }} - {{ $tipo->descricao }}
                                         </option>
@@ -48,8 +48,8 @@
                             <label for="inputEmail4" class="form-label">Região Administrativa</label>
                             <select
                                     class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md"
-                                    name="id_ra" id="id_ra">
-                                    <option>RA</option>
+                                    name="id_ra" id="id_ra" >
+                                    <option value="" disabled selected>Selecione uma região...</option>
                                     @foreach ($regiao as $regiao)
                                         <option value="{{ $regiao->id }}">{{ $regiao->nome }}</option>
                                     @endforeach
@@ -60,7 +60,7 @@
                               <select
                                     class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                                     name="id_empreendimento" id="id_empreendimento">
-                                    <option>Empreendimento</option>
+                                    
                                     @foreach ($tipo_empre as $empre)
                                         <option value="{{ $empre->id }}">{{ $empre->tipo }}</option>
                                     @endforeach
@@ -72,7 +72,7 @@
                             <select
                             class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                             name="id_situacao" id="id_situacao">
-                            <option>Situação</option>
+                            
                             @foreach ($situacao as $situacao)
                                 <option value="{{ $situacao->id }}">{{ $situacao->situacao }}</option>
                             @endforeach
@@ -87,7 +87,7 @@
                             </div>
                           </div>
   
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                               <label for="inputCity" class="form-label">Data de Concessão</label>
                               <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
                                 inline="true">
@@ -96,7 +96,18 @@
                                 <i class="fas fa-calendar input-prefix"></i>
                             </div>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
+                              <label for="inputCity" class="form-label">Prazo de renovação</label>
+                              <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
+                                inline="true">
+                                <input placeholder="Select date" type="date" id="prazorenovacao" name="prazorenovacao"
+                                    class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md">
+                                <i class="fas fa-calendar input-prefix"></i>
+                            </div>
+                            </div>
+
+                            <div class="col-md-4">
                                 <label for="inputCity" class="form-label">Validade</label>
                                 <input id="validade" name="validade" type="number" class="form-control"/>
                               </div>
@@ -115,7 +126,7 @@
                                   <select
                             class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                             name="id_vigencia" id="id_vigencia">
-                            
+                            <option value="NULL" disabled selected>Selecione um tipo...</option>
                             @foreach ($vigencia as $vigencia)
                                 <option value="{{ $vigencia->id }}">{{ $vigencia->vigencia }}</option>
                             @endforeach
@@ -137,13 +148,15 @@
                                 <textarea class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
                                     placeholder="Observação" id="observacao" name="observacao"></textarea>
                             </div>
-                            <div class="flex items-center justify-center mt-4">
-                              <x-primary-button>{{ __('Salvar') }}</x-primary-button>
-                            </div>
-                            
-                            
                           </div>
-                          
+
+                          <div class="mb-3">
+                            <label for="formFile" class="form-label">Arquivo da Licença</label>
+                            <input class="form-control" type="file" id="arquivo" name="arquivo">
+                          </div>
+                          <div class="flex items-center justify-center mt-4">
+                            <x-primary-button>{{ __('Salvar') }}</x-primary-button>
+                          </div>
                         </form>
                         
                   

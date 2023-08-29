@@ -4,10 +4,20 @@
             {{ __('Licenças') }}
         </h2>
     </x-slot>
+
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+        </style>
     
     <div class="py-12">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 
@@ -51,14 +61,25 @@
                                                             <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->regiao_adm->nome}}</span>
                                                         </td>
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->vigencia->vigencia}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50" value="{{$licen->id}}">{{$licen->prazo_renovacao}}</span>
+                                                        </td>
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <a class="btn btn-outline-primary" href={{"licencas/" .$licen['id']}} role="button">Visualizar</a>
                                                         </td>
+                                                       
                                                         @if(Auth::check() && Auth::user()->admin == 1)
                                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                                             <a class="btn btn-info" href={{"licenca-update/" .$licen['id']}} role="button">Editar</a>
                                                         </td>
                                                         @endif
-                                                        
+                                                        <td class="p-3 text-sm text-gray-700 whitespace-nowrap pr-10" >
+                                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-blue-800 bg-blue-200 rounded-lg bg-opacity-50">
+                                                                <a href="{{ route('download',$licen->id) }}" class="font-bold text-black hover:underline">download</a>
+                                                            </span>
+                                                        </td>
                         
                         
                                                     </tr>

@@ -31,6 +31,8 @@ class LicencasController extends Controller
      */
     public function create(Request $request)
     {
+
+        
         $licencas = new Licencas();
         $licencas->id_ra = $request->input('id_ra');
         $licencas->id_situacao = $request->input('id_situacao');
@@ -42,13 +44,15 @@ class LicencasController extends Controller
         $licencas->doc_sei = $request->input('doc_sei');
         $licencas->numero = $request->input('numero');
         $licencas->data_concessao = $request->input('dataconcessao');
+        $licencas->prazo_renovacao = $request->input('prazorenovacao');
         $licencas->validade = $request->input('validade');
         $licencas->data_vencimento = Carbon::parse($request->input('data_concessao'))->addYears($licencas->validade);
-    
-
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
+        $licencas->arquivo = $request->input('arquivo');
         $licencas->save();
+
+        
 
         // $licencas->validade = $request->input('validade');
        
@@ -60,6 +64,21 @@ class LicencasController extends Controller
         return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
 
     }
+
+    public function generateFileName($file, $extension) {
+        $timestamp = date("YmdHis");
+        $originalName = $file->getClientOriginalName();
+
+        if($extension == "png") {
+            $fileName = "arquivo_".$timestamp.".".$extension;
+        } elseif($extension == "zip") {
+            $fileName = str_replace(".".$extension, "", $originalName)."_".$timestamp.".".$extension;
+        } else {
+            $fileName = $originalName;
+        }
+
+        return $fileName;
+    }
     
 
     /**
@@ -68,31 +87,28 @@ class LicencasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_ra' => 'required',
-            'id_situacao' => 'required',
-            'id_empreendimento' => 'required',
-            'id_tipo' => 'required',
-            'id_vigencia' => 'required',
-            'empreendimento' => 'required',
-            'processo' => 'required',
-            'doc_sei' => 'required|max:8|regex:/^[0-9]*$/',
-            'num_processo' => 'required|regex:/^[0-9]*$/',
-            'data_concessao' => 'required',
-            'data_vencimento' => 'required',
-            'observacao' => 'required',
-            'interessado' => 'required',
-            'validade' => 'required|regex:/\d+/|min:1',
-
-            // 'id_bacia' => 'required',
-            // 'processo' => 'required',
-            // 'latitude' => 'required',
-            // 'longitude' => 'required',
+            'id_ra' => 'nullable',
+            'id_situacao' => 'nullable',
+            'id_empreendimento' => 'nullable',
+            'id_tipo' => 'nullable',
+            'id_vigencia' => 'nullable',
+            'empreendimento' => 'nullable',
+            'processo' => 'nullable',
+            'doc_sei' => 'nullable|max:8|regex:/^[0-9]*$/',
+            'num_processo' => 'nullable|regex:/^[0-9]*$/',
+            'data_concessao' => 'nullable',
+            'data_vencimento' => 'nullable',
+            'observacao' => 'nullable',
+            'interessado' => 'nullable',
+            'validade' => 'nullable|regex:/\d+/|min:1',
            
         ]);
 
-        Licencas::create($request->all());
+        
 
-        return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
+        // Licencas::create($request->all());
+
+        // return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
     }
 
     /**

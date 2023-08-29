@@ -2,7 +2,7 @@
     @foreach ($licencas as $licencas)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Licença - ') . $licencas->num_processo }}
+            {{ __('Licença - ') . $licencas->numero }}
 
         </h2>
     </x-slot>
@@ -90,10 +90,11 @@
                     <p class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Condicionantes') }}
 
+                        @if(Auth::check() && Auth::user()->admin == 1)
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a class="btn btn-primary" href={{"cadastro-condicionantes/" .$licencas['id']}} role="button">Adicionar Condicionante</a>
                         </div>
-
+                        @endif
                         
                     </p>
                     <table class="table table-hover w-full">

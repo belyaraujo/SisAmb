@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Licencas;
 use App\Models\Condicionantes;
+use App\Models\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PrazoCondicionanteEmail;
+use Illuminate\Support\Facades\Auth;
 
 class CondicionanteController extends Controller
 {
@@ -30,6 +35,8 @@ class CondicionanteController extends Controller
         $condicionantes->condicionante = $request->input('condicionante');
         $condicionantes->prazo_condicionante = $request->input('prazo_condicionante');
         $condicionantes->save();
+
+        //Mail::to($user)->send(new SendMail($user));
 
          return redirect()->route('licencas-view', ['id' => $licencas->id])->with('msg','Criado com sucesso!');
         
@@ -84,5 +91,31 @@ class CondicionanteController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function validadecondi()
+    {
+        $user = Auth::user();
+        $condicionantes = Condicionantes::get();
+        
+
+        // foreach ($user as $user) {
+
+            $prazo = $condicionantes->prazo_condicionante;
+            $dataAtual = now();
+            $dataPrazo = Carbon::parse($prazo);
+            $diasRestantes = $dataAtual->diffInDays($dataPrazo);
+
+        if ($diasRestantes <= 60) {
+            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+        }elseif ($diasRestantes <= 30){
+            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+        }elseif ($diasRestantes <= 15){
+            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+        }elseif ($diasRestantes <= 2){
+            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+        }
+    //}
+    return redirect()->back();
     }
 }

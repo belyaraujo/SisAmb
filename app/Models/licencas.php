@@ -31,11 +31,12 @@ class Licencas extends Model
         'observacao',
         'interessado',
         'doc_sei',
-        // 'processo'
+        'prazo_renovacao',
+        'arquivo',
+         // 'processo'
         // 'latitude',
         // 'longitude',
         // 'id_bacia',
-        // 'prazo_renovacao',
     ];
 
     public function regiao_adm(){

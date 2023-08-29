@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LicencasController;
 use App\Http\Controllers\CondicionanteController;
 use App\Http\Controllers\CadastroUsuarioController;
+use App\Http\Controllers\DownloadArquivoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::get('/enviar-emails', [CondicionanteController::class, 'validadecondi'])->name('enviar-emails');
+
 Route::get('/cadastro-user',  [CadastroUsuarioController::class, 'index'])
 ->name('cadastro-user');
 Route::post('/cadastro-user',  [CadastroUsuarioController::class, 'store'])
@@ -34,6 +37,10 @@ Route::get('/dashboard', [LicencasController::class, 'index'])->middleware(['aut
 
 Route::get('/cadastro', [LicencasController::class, 'show'])->middleware(['auth', 'verified'])->name('cadastro-licencas');
 Route::post('/cadastro-licencas', [LicencasController::class, 'create'])->name('cadastro');
+
+Route::get('/download{id}', [DownloadArquivoController::class, 'download'])
+->name('download');
+
 Route::get('/licencas/{id}', [LicencasController::class, 'licencas'])->name('licencas-view');
 Route::get('/licenca-update/{id}', [LicencasController::class, 'edit'])->name('licencas-update');
 Route::post('/licenca-update/{id}', [LicencasController::class, 'update'])->name('licencas-update');
