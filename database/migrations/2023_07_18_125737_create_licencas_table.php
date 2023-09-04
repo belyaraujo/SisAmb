@@ -15,22 +15,22 @@ return new class extends Migration
     {
         Schema::create('licencas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_ra')->constrained('regiao_administrativa')->nullable()->default('NULL');
-            $table->foreignId('id_empreendimento')->constrained('tipo_empreendimento')->nullable()->default('NULL');
-            $table->foreignId('id_tipo')->constrained('tipo')->nullable()->default('NULL');
-            $table->foreignId('id_situacao')->constrained('situacao')->nullable()->default('NULL');
-            $table->foreignId('id_vigencia')->constrained('vigencia')->nullable()->default('NULL');
+            $table->foreignId('id_ra')->constrained('regiao_administrativa');
+            $table->foreignId('id_empreendimento')->nullable()->constrained('tipo_empreendimento');
+            $table->foreignId('id_tipo')->constrained('tipo');
+            $table->foreignId('id_situacao')->nullable()->constrained('situacao');
+            $table->foreignId('id_vigencia')->nullable()->constrained('vigencia');
             //$table->foreignId('id_bacia')->constrained('bacia_hidrografica');
            
 
 
-            $table->longtext('empreendimento')->nullable();
+            $table->longtext('empreendimento');
             // $table->float('latitude');, 
             // $table->float('longitude');
             $table->string('num_processo')->nullable();
             $table->integer('doc_sei')->nullable();
-            $table->integer('numero')->nullable();
-            $table->date('data_concessao')->nullable();
+            $table->integer('numero');
+            $table->date('data_concessao');
             $table->date('data_vencimento')->nullable();
             $table->integer('validade')->nullable();
             $table->date('prazo_renovacao')->nullable();

@@ -11,26 +11,9 @@ class DownloadArquivoController extends Controller
     public function download($id)
     {
 
-
-    // recupera o arquivo com base no id
-    $arquivo = Licencas::find($id);
-
-    // verifique se o arquivo foi encontrado
-    if (!$arquivo) {
-        abort(404);
+        $arquivo = Licencas::find($id);
+        return response()->download(storage_path(). '/app/public/' . $arquivo->arquivo);
     }
-
-    // obter o caminho completo do arquivo
-    $caminho_arquivo = storage_path("app/public/" . $arquivo->arquivo);
-
-    // verifique se o arquivo existe
-    if (!file_exists($caminho_arquivo)) {
-        abort(404);
-    }
-
-    // baixar o arquivo
-    return response()->download($caminho_arquivo, $arquivo->arquivo);
-}
     /**
      * Display a listing of the resource.
      */

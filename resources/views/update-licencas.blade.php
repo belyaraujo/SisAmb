@@ -2,7 +2,7 @@
     @foreach ($licencas as $licencas)
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Editar Licença - ') . $licencas->num_processo }}
+                {{ __('Editar Licença - ') . $licencas->numero . '/' . date('Y', strtotime($licencas->data_concessao)) }}
 
             </h2>
         </x-slot>
@@ -21,39 +21,42 @@
                     <form class="row g-3" method="POST" action="{{ url('licenca-update/' . $licencas->id) }}">
                         @csrf
                         <input type="text" class="form-control" id="inputEmail4" value="{{ $licencas->id }}">
-                        {{--Número do processo--}}
+                        {{-- Número do processo --}}
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Número do processo</label>
                             <input type="text" class="form-control" id="num_processo" name="num_processo"
                                 value="{{ $licencas->num_processo }}">
                         </div>
 
-                        {{--Documento SEI--}}
+                        {{-- Documento SEI --}}
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Documento SEI</label>
                             <input type="text" class="form-control" id="doc_sei" name="doc_sei"
                                 value="{{ $licencas->doc_sei }}">
                         </div>
 
-                        {{--Número--}}
+                        {{-- Número --}}
                         <div class="col-md-2">
                             <label for="inputEmail4" class="form-label">Número</label>
-                            <input type="number" class="form-control" id="numero" name="numero"  value="{{ $licencas->numero }}">
+                            <input type="number" class="form-control" id="numero" name="numero"
+                                value="{{ $licencas->numero }}">
                         </div>
 
-                        {{--Tipo--}}
+                        {{-- Tipo --}}
                         <div class="col-md-2">
                             <label for="inputZip" class="form-label">Tipo</label>
-                            <select class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
+                            <select
+                                class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                                 name="id_tipo" id="id_tipo" value="{{ $licencas->tipo->sigla }}">
                                 <option value="{{ $licencas->id_tipo }}">{{ $licencas->tipo->sigla }}</option>
                                 @foreach ($tipo as $tipo)
-                                    <option value="{{ $tipo->id }}">{{ $tipo->sigla }} - {{ $tipo->descricao }}</option>
+                                    <option value="{{ $tipo->id }}">{{ $tipo->sigla }} - {{ $tipo->descricao }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
 
-                        {{--Região Administrativa--}}
+                        {{-- Região Administrativa --}}
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Região Administrativa</label>
                             <select
@@ -66,75 +69,81 @@
                             </select>
                         </div>
 
-                        {{--Tipo de empreendimento--}}
+                        {{-- Tipo de empreendimento --}}
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Tipo de empreendimento</label>
                             <select
-                                class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
+                                class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md"
                                 name="id_empreendimento" id="id_empreendimento">
-                                <option value="{{ $licencas->id_empreendimento }}">{{ $licencas->tipo_empreendimento->tipo }}</option>
+                                <option value="{{ $licencas->id_empreendimento ?? '' }}">
+                                    {{ $licencas->tipo_empreendimento->tipo ?? 'Selecione uma opção' }}
+                                </option>
                                 @foreach ($tipo_empre as $empre)
                                     <option value="{{ $empre->id }}">{{ $empre->tipo }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        {{--Situação--}}
+
+                        {{-- Situação --}}
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Situação</label>
                             <select
-                            class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
-                            name="id_situacao" id="id_situacao">
-                            <option value="{{$licencas->id_situacao}}">{{$licencas->situacao->situacao}}</option>
+                                class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
+                                name="id_situacao" id="id_situacao">
+                                <option value="{{ $licencas->id_situacao ?? '' }}">
+                                    {{ $licencas->situacao->situacao ?? 'Selecione uma opção' }}</option>
 
-                            @foreach ($situacao as $situacao)
-                                <option value="{{ $situacao->id }}">{{ $situacao->situacao }}</option>
-                            @endforeach
-                        </select>
+                                @foreach ($situacao as $situacao)
+                                    <option value="{{ $situacao->id }}">{{ $situacao->situacao }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        {{--Empreendimento--}}
+                        {{-- Empreendimento --}}
                         <div class="col-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Empreendimento</label>
-                            <textarea class="form-control" id="empreendimento" name="empreendimento" rows="4" value="{{ $licencas->empreendimento }}">{{ $licencas->empreendimento }}</textarea>
+                            <textarea class="form-control" id="empreendimento" name="empreendimento" rows="4"
+                                value="{{ $licencas->empreendimento }}">{{ $licencas->empreendimento }}</textarea>
                         </div>
 
-                        {{--Data de Concessão--}}
+                        {{-- Data de Concessão --}}
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">Data de Concessão</label>
                             <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
-                            inline="true">
-                            <input placeholder="Select date" type="date" id="dataconcessao" name="dataconcessao"
-                                class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md"
-                                value="{{$licencas->data_concessao}}">
-                            <i class="fas fa-calendar input-prefix"></i>
-                        </div>
+                                inline="true">
+                                <input placeholder="Select date" type="date" id="dataconcessao" name="dataconcessao"
+                                    class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md"
+                                    value="{{ $licencas->data_concessao }}">
+                                <i class="fas fa-calendar input-prefix"></i>
+                            </div>
                         </div>
 
-                        {{--Validade--}}
+                        {{-- Validade --}}
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">Validade</label>
                             <input id="validade" name="validade" type="number" class="form-control"
                                 value="{{ $licencas->validade }}" />
                         </div>
 
-                        {{--Vigência--}}
+                        {{-- Vigência --}}
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">Vigência</label>
                             <select
                                 class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                                 name="id_vigencia" id="id_vigencia">
-                                <option value="{{ $licencas->id_vigencia }}">{{ $licencas->vigencia->vigencia }}</option>
+                                <option value="{{ $licencas->id_vigencia ?? '' }}">
+                                    {{ $licencas->vigencia->vigencia ?? 'Selecione uma opção' }}</option>
                                 @foreach ($vigencia as $vigencia)
                                     <option value="{{ $vigencia->id }}">{{ $vigencia->vigencia }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        {{--Interessado--}}
+                        {{-- Interessado --}}
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">Interessado</label>
-                                <select
+                            <select
                                 class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                                 name="interessado" id="interessado">
                                 <option value="{{ 'NOVACAP' }}">Novacap</option>
@@ -142,7 +151,7 @@
                             </select>
                         </div>
 
-                        {{--Observação--}}
+                        {{-- Observação --}}
                         <div class="col-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Observação</label>
                             <textarea class="form-control" id="observacao" name="observacao" value="{{ $licencas->observacao }}">{{ $licencas->observacao }}</textarea>
