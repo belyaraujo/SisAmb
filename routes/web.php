@@ -42,8 +42,8 @@ Route::post('/cadastro-licencas', [LicencasController::class, 'create'])->name('
 Route::get('/licenca-update/{id}', [LicencasController::class, 'edit'])->name('licencas-update');
 Route::post('/licenca-update/{id}', [LicencasController::class, 'update'])->name('licencas-update');
 
-Route::get('/download{id}', [DownloadArquivoController::class, 'download'])
-->name('download');
+Route::get('/download/{id}', [DownloadArquivoController::class, 'download'])->name('download');
+
 
 // --------------------- Condicionantes -------------------------
 

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('licencas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_ra')->constrained('regiao_administrativa');
+<<<<<<< HEAD
             $table->foreignId('id_empreendimento')->constrained('tipo_empreendimento')->nullable()->default('NULL');
             $table->foreignId('id_tipo')->constrained('tipo');
             $table->foreignId('id_situacao')->constrained('situacao')->nullable()->default('NULL');
@@ -24,6 +25,19 @@ return new class extends Migration
            
 
             $table->longtext('empreendimento');
+=======
+            $table->foreignId('id_empreendimento')->nullable()->constrained('tipo_empreendimento');
+            $table->foreignId('id_tipo')->constrained('tipo');
+            $table->foreignId('id_situacao')->nullable()->constrained('situacao');
+            $table->foreignId('id_vigencia')->nullable()->constrained('vigencia');
+            //$table->foreignId('id_bacia')->constrained('bacia_hidrografica');
+           
+
+
+            $table->longtext('empreendimento');
+            // $table->float('latitude');, 
+            // $table->float('longitude');
+>>>>>>> c45a5717eac9b340c06fc7a1846b744c6821b04f
             $table->string('num_processo')->nullable();
             $table->integer('doc_sei')->nullable();
             $table->integer('numero');
