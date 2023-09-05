@@ -22,7 +22,10 @@ class LicencasController extends Controller
      */
     public function index()
     {
+
         $licencas = Licencas::get();
+       
+        
         return view('dashboard', ['licencas' => $licencas]);
     }
 
@@ -87,21 +90,22 @@ class LicencasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_ra' => 'nullable',
+            'id_ra' => 'required',
             'id_situacao' => 'nullable',
             'id_empreendimento' => 'nullable',
-            'id_tipo' => 'nullable',
+            'id_tipo' => 'required',
             'id_vigencia' => 'nullable',
-            'empreendimento' => 'nullable',
+            'empreendimento' => 'required',
             'processo' => 'nullable',
             'doc_sei' => 'nullable|max:8|regex:/^[0-9]*$/',
-            'num_processo' => 'nullable|regex:/^[0-9]*$/',
-            'data_concessao' => 'nullable',
+            'numero' => 'required',
+            'num_processo' => 'nullable|regex:^[0-9-\/]*$',
+            'data_concessao' => 'required',
             'data_vencimento' => 'nullable',
             'observacao' => 'nullable',
             'interessado' => 'nullable',
             'validade' => 'nullable|regex:/\d+/|min:1',
-           
+            'arquivo' => 'required',
         ]);
 
         
@@ -182,6 +186,7 @@ class LicencasController extends Controller
         $licencas->doc_sei = $request->input('doc_sei');
         $licencas->numero = $request->input('numero');
         $licencas->data_concessao = $request->input('dataconcessao');
+        $licencas->prazo_renovacao = $request->input('prazorenovacao');
         $licencas->validade = $request->input('validade');
         $licencas->data_vencimento = Carbon::parse($request->input('data_concessao'))->addYears($licencas->validade);
         $licencas->observacao = $request->input('observacao');

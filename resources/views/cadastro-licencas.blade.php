@@ -72,7 +72,7 @@
                             <select
                             class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md "
                             name="id_situacao" id="id_situacao">
-                            
+                            <option value="" disabled selected>Selecione um tipo...</option>
                             @foreach ($situacao as $situacao)
                                 <option value="{{ $situacao->id }}">{{ $situacao->situacao }}</option>
                             @endforeach

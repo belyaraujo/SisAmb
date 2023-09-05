@@ -74,7 +74,11 @@ class CondicionanteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $condicionantes = Condicionantes::where('id','=', $id)->get();
+        return view('update-condicionantes', [
+            'condicionantes'=> $condicionantes,
+        
+        ]);
     }
 
     /**
@@ -82,7 +86,12 @@ class CondicionanteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $condicionantes = Condicionantes::find($id);
+        $condicionantes->condicionante = $request->input('condicionante');
+        $condicionantes->prazo_condicionante = $request->input('prazo_condicionante');
+        $condicionantes->update();
+
+        return redirect()->route('dashboard')->with('success', 'Condicionante editada com sucesso.');
     }
 
     /**
