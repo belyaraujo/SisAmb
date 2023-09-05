@@ -15,6 +15,30 @@
         }
     </style>
 
+    <script>
+// Detecta a alteração do campo de data de vencimento (você pode usar eventos adequados)
+$('#dataVencimentoInput').on('change', function () {
+    var novaDataVencimento = $(this).val();
+    var linha = $(this).closest('tr');
+
+    // Obtém a classe de cor original da linha
+    var classeOriginal = linha.data('original-class');
+
+    // Calcula a nova classe com base na nova data de vencimento
+    var dataAtual = new Date();
+    var dataVencimento = new Date(novaDataVencimento);
+
+    if (dataAtual > dataVencimento) {
+        // A data está vencida, aplique a classe de cor desejada (por exemplo, vermelha)
+        linha.removeClass(classeOriginal).addClass('bg-red-200');
+    } else {
+        // A data não está vencida, restaure a classe de cor original
+        linha.removeClass('bg-red-200').addClass(classeOriginal);
+    }
+});
+
+    </script>
+
     <div class="py-12">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -25,11 +49,11 @@
 
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="max-w-xl">
-                        <table class="table table-hover w-full">
+                        <table class="table-primary">
                             <thead class="table-primary bg-gray-50 border-b-2 border-gray-200"
                                 style="background-color: 	#cae8f5;">
                                 <tr>
-
+                                    {{-- #cae8f5; --}}
                                     <div class="p-2 bg-white border-b border-gray-200">
                                         <th class="w-21 p-3 text-sm font-semibold traking-wide text-left"
                                             scope="col">Tipo</th>
@@ -51,9 +75,13 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 @foreach ($licencas as $licen)
-                                    <tr class="bg-gray-100">
+                                    @php
+                                        $dataAtual = \Carbon\Carbon::now();
+                                        $dataPrazoRenovacao = \Carbon\Carbon::parse($licen->prazo_renovacao);
+                                        $classeCss = $dataAtual->greaterThan($dataPrazoRenovacao) ? 'bg-red-200' : 'bg-gray-100';
+                                    @endphp
 
-
+                                    <tr class="{{ $classeCss }}" data-original-class="{{ $classeCss }}">
 
                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                             <span
@@ -81,7 +109,7 @@
                                                 class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50"
                                                 value="{{ $licen->id }}">{{ $licen->regiao_adm->nome }}</span>
                                         </td>
-                                      
+
                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                             @if ($licen)
                                                 <span
@@ -113,11 +141,13 @@
                                             </td>
                                         @endif
                                         <td class="p-3 text-sm text-gray-700 whitespace-nowrap pr-10">
-                                            <span class="p-1.5 text-xs font-medium uppercase tracking-wider text-blue-800 bg-blue-200 rounded-lg bg-opacity-50">
-                                                <a href="{{ route('download', $licen->id) }}" class="font-bold text-black hover:underline">download</a>
+                                            <span
+                                                class="p-1.5 text-xs font-medium uppercase tracking-wider text-blue-800 bg-blue-200 rounded-lg bg-opacity-50">
+                                                <a href="{{ route('download', $licen->id) }}"
+                                                    class="font-bold text-black hover:underline">download</a>
                                             </span>
                                         </td>
-                                        
+
 
 
                                     </tr>

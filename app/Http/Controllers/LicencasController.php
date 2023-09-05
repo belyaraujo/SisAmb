@@ -22,7 +22,10 @@ class LicencasController extends Controller
      */
     public function index()
     {
+
         $licencas = Licencas::get();
+       
+        
         return view('dashboard', ['licencas' => $licencas]);
     }
 
@@ -183,6 +186,7 @@ class LicencasController extends Controller
         $licencas->doc_sei = $request->input('doc_sei');
         $licencas->numero = $request->input('numero');
         $licencas->data_concessao = $request->input('dataconcessao');
+        $licencas->prazo_renovacao = $request->input('prazorenovacao');
         $licencas->validade = $request->input('validade');
         $licencas->data_vencimento = Carbon::parse($request->input('data_concessao'))->addYears($licencas->validade);
         $licencas->observacao = $request->input('observacao');

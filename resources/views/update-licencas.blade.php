@@ -108,7 +108,7 @@
                         </div>
 
                         {{-- Data de Concessão --}}
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="inputCity" class="form-label">Data de Concessão</label>
                             <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
                                 inline="true">
@@ -118,9 +118,21 @@
                                 <i class="fas fa-calendar input-prefix"></i>
                             </div>
                         </div>
+                        {{-- Prazo de renovação --}}
+                        <div class="col-md-4">
+                            <label for="inputCity" class="form-label">Prazo de renovação</label>
+                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker"
+                                inline="true">
+                                <input placeholder="Select date" type="date" id="prazorenovacao"
+                                    name="prazorenovacao"
+                                    class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md"
+                                    value="{{ $licencas->prazo_renovacao }}">
+                                <i class="fas fa-calendar input-prefix"></i>
+                            </div>
+                        </div>
 
                         {{-- Validade --}}
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="inputCity" class="form-label">Validade</label>
                             <input id="validade" name="validade" type="number" class="form-control"
                                 value="{{ $licencas->validade }}" />
