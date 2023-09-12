@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DownloadArquivoController extends Controller
 {
@@ -11,9 +12,26 @@ class DownloadArquivoController extends Controller
     public function download($id)
     {
 
-        $arquivo = Licencas::find($id);
-        return response()->download(storage_path(). '/app/public/' . $arquivo->arquivo);
+
+    // recupera o arquivo com base no id
+    $arquivo = Licencas::find($id);
+
+    // verifique se o arquivo foi encontrado
+    if (!$arquivo) {
+        abort(404);
     }
+
+    // obter o caminho completo do arquivo
+    $caminho_arquivo = storage_path("app/public/" . $arquivo->arquivo);
+
+    // verifique se o arquivo existe
+    if (!file_exists($caminho_arquivo)) {
+        abort(404);
+    }
+
+    // baixar o arquivo
+    return response()->download($caminho_arquivo, $arquivo->arquivo);
+}
     /**
      * Display a listing of the resource.
      */
