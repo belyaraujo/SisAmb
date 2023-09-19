@@ -6,6 +6,8 @@ use App\Http\Controllers\LicencasController;
 use App\Http\Controllers\CondicionanteController;
 use App\Http\Controllers\CadastroUsuarioController;
 use App\Http\Controllers\DownloadArquivoController;
+use App\Models\Licencas;
+use App\Models\Condicionantes;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,12 @@ Route::get('/licenca-update/{id}', [LicencasController::class, 'edit'])->name('l
 Route::post('/licenca-update/{id}', [LicencasController::class, 'update'])->name('licencas-update');
 
 Route::get('/download/{id}', [DownloadArquivoController::class, 'download'])->name('download');
+
+
+Route::get('/dashboard', function () {
+    $licencas = Licencas::get();
+    return view('notificacao', compact('licencas'));
+});
 
 
 // --------------------- Condicionantes -------------------------

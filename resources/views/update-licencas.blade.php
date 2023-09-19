@@ -168,6 +168,12 @@
                             <label for="exampleFormControlTextarea1" class="form-label">Observação</label>
                             <textarea class="form-control" id="observacao" name="observacao" value="{{ $licencas->observacao }}">{{ $licencas->observacao }}</textarea>
                         </div>
+
+                         {{-- Arquivo da Licença --}}
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Arquivo da Licença</label>
+                        <input class="form-control" type="file" id="arquivo" name="arquivo">
+                    </div>
                         <x-primary-button>{{ __('Editar') }}</x-primary-button>
                     </form>
     @endforeach

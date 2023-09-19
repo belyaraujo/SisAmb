@@ -205,11 +205,12 @@ class LicencasController extends Controller
         $licencas->data_vencimento = Carbon::parse($request->input('data_concessao'))->addYears($licencas->validade);
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
+        $licencas->arquivo = $request->input('arquivo');
         $licencas->update();
 
         return redirect()->route('dashboard')->with('success', 'Editado excluído com sucesso.');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */

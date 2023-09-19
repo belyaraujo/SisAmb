@@ -67,8 +67,12 @@
                                             scope="col">Vigência</th>
                                         <th class="w-21 p-3 text-sm font-semibold traking-wide text-left"
                                             scope="col">Prazo de renovação</th>
-                                        <th class="w-21 p-3 text-sm font-semibold traking-wide text-left"
+                                            <th class="w-21 p-3 text-sm font-semibold traking-wide text-left"
+                                            scope="col"></th>
+                                        <th class="w-21 p-3 text-md font-semibold traking-wide text-center"
                                             scope="col">Ações</th>
+                                        <th class="w-21 p-3 text-sm font-semibold traking-wide text-left"
+                                            scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
