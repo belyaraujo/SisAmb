@@ -47,10 +47,10 @@ Route::post('/licenca-update/{id}', [LicencasController::class, 'update'])->name
 Route::get('/download/{id}', [DownloadArquivoController::class, 'download'])->name('download');
 
 
-Route::get('/dashboard', function () {
-    $licencas = Licencas::get();
-    return view('notificacao', compact('licencas'));
-});
+// Route::get('/dashboard', function () {
+//     $licencas = Licencas::get();
+//     return view('notificacao', compact('licencas'));
+// });
 
 
 // --------------------- Condicionantes -------------------------
