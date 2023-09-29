@@ -22,7 +22,7 @@ class DownloadArquivoController extends Controller
     }
 
     // obter o caminho completo do arquivo
-    $caminho_arquivo = storage_path("app/public/" . $arquivo->arquivo);
+    $caminho_arquivo = storage_path("public/arquivos/" . $arquivo->arquivo);
 
     // verifique se o arquivo existe
     if (!file_exists($caminho_arquivo)) {

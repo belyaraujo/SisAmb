@@ -59,7 +59,7 @@ class LicencasController extends Controller
             if ($file->isValid()) {
                 $extension = $file->getClientOriginalExtension();
                 $fileName = $this->generateFileName($file, $extension);
-                $file->storeAs('app/public/', $fileName); // Altere para o caminho de armazenamento desejado
+                $file->storeAs('public/arquivos/', $fileName); // Altere para o caminho de armazenamento desejado
     
                 // Salve o nome do arquivo no banco de dados
                 $licencas->arquivo = $fileName;
@@ -205,8 +205,26 @@ class LicencasController extends Controller
         $licencas->data_vencimento = Carbon::parse($request->input('data_concessao'))->addYears($licencas->validade);
         $licencas->observacao = $request->input('observacao');
         $licencas->interessado = $request->input('interessado');
-        $licencas->arquivo = $request->input('arquivo');
-        $licencas->update();
+        // $licencas->arquivo = $request->input('arquivo');
+        // $licencas->update();
+        if ($request->hasFile('arquivo')) {
+            $file = $request->file('arquivo');
+    
+            // Verifique se o arquivo é válido e mova-o para o diretório de destino
+            if ($file->isValid()) {
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $this->generateFileName($file, $extension);
+                $file->storeAs('public/arquivos/', $fileName); // Altere para o caminho de armazenamento desejado
+    
+                // Salve o nome do arquivo no banco de dados
+                $licencas->arquivo = $fileName;
+            } else {
+                return redirect()->back()->with('error', 'O arquivo enviado não é válido.');
+            }
+        $licencas->save();
+
+      
+        }
 
         return redirect()->route('dashboard')->with('success', 'Editado excluído com sucesso.');
     }
