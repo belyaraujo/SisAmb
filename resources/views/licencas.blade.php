@@ -21,10 +21,10 @@
 
                 if (dataAtual > dataVencimento) {
                     // A data está vencida, aplique a classe de cor desejada (por exemplo, vermelha)
-                    linha.removeClass(classeOriginal).addClass('bg-red-200');
+                    linha.removeClass(classeOriginal).addClass('bg-red-300');
                 } else {
                     // A data não está vencida, restaure a classe de cor original
-                    linha.removeClass('bg-red-200').addClass(classeOriginal);
+                    linha.removeClass('bg-red-300').addClass(classeOriginal);
                 }
             });
         </script>
@@ -85,9 +85,9 @@
                         </div>
 
 
-                        <div class="col-12">
+                        <div class="col-md-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Empreendimento</label>
-                            <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="4"
+                            <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3"
                                 value="{{ $licencas->empreendimento }}">{{ $licencas->empreendimento }}</textarea>
                         </div>
 
@@ -114,17 +114,16 @@
 
                         <div class="col-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Observação</label>
-                            <textarea class="form-control" disabled id="exampleFormControlTextarea1" value="{{ $licencas->observacao }}">{{ $licencas->observacao }}</textarea>
+                            <textarea class="form-control" disabled id="exampleFormControlTextarea1" 
+                            value="{{ $licencas->observacao }}" rows="3">{{ $licencas->observacao }}</textarea>
                         </div>
                 </div>
+                </form>
                 {{-- Condicionantes --}}
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
                     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
                     crossorigin="anonymous">
-
-
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-
                     <p class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Condicionantes') }}
 
@@ -135,64 +134,62 @@
                                     role="button">Adicionar Condicionante</a>
                             </div>
                         @endif
-
                     </p>
                     <table class="table-primary table-hover w-full">
                         <thead
-                            class="table-primary table-primary p-3 bg-sky-600 shadow dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-                            <tr>
+                        class="table-primary table-primary p-3 bg-sky-600 shadow dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+                        <tr>
 
-                                <div class="p-2 bg-white border-b border-gray-200">
-                                    <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
-                                        scope="col">Condicionantes</th>
-                                    <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
-                                        scope="col">Prazo da Condicionante</th>
-                                    <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
-                                        scope="col">Editar</th>
+                            <div class="p-2 bg-white border-b border-gray-200">
+                                <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
+                                    scope="col">Condicionantes</th>
+                                <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
+                                    scope="col">Prazo da Condicionante</th>
+                                <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
+                                    scope="col">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        @foreach ($condicionantes as $cond)
+                            @php
+                                $dataAtual = \Carbon\Carbon::now();
+                                $dataPrazoRenovacao = \Carbon\Carbon::parse($cond->prazo_condicionante);
+                                $classeCss = $dataAtual->greaterThan($dataPrazoRenovacao) ? 'bg-red-300' : 'bg-gray-100';
+                            @endphp
+                            <tr >
+                                <td class="p-3 text-sm text-gray-700 w-50 ">
+                                    <span
+                                        class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50"
+                                        value="{{ $cond->id }}">{{ $cond->condicionante }}</span>
+                                </td>
+
+                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                    <span class="{{ $classeCss }} p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50"
+                                        value="{{ $cond->id }}">{{ date('d/m/Y', strtotime($cond->prazo_condicionante)) }}</span>
+                                </td>
+                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                    <a
+                                        href="{{ route('condicionantes-update', ['id' => $cond->id]) }}"class="text-warning">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                            fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd"
+                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg>
+                                    </a>
+                                </td>
+
                             </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100">
-                            @foreach ($condicionantes as $cond)
-                                @php
-                                    $dataAtual = \Carbon\Carbon::now();
-                                    $dataPrazoRenovacao = \Carbon\Carbon::parse($cond->prazo_condicionante);
-                                    $classeCss = $dataAtual->greaterThan($dataPrazoRenovacao) ? 'bg-red-200' : 'bg-gray-100';
-                                @endphp
-                                <tr class="">
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                        <span
-                                            class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50"
-                                            value="{{ $cond->id }}">{{ $cond->condicionante }}</span>
-                                    </td>
-
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                        <span class="{{ $classeCss }}"
-                                            class="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50"
-                                            value="{{ $cond->id }}">{{ date('d/m/Y', strtotime($cond->prazo_condicionante)) }}</span>
-                                    </td>
-                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                                        <a
-                                            href="{{ route('condicionantes-update', ['id' => $cond->id]) }}"class="text-warning">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                            </svg>
-                                        </a>
-                                    </td>
-
-                                </tr>
-                            @endforeach
-                        </tbody>
+                        @endforeach
+                    </tbody>
                     </table>
+                    <div style="margin: 0px">
+                        {{ $condicionantes->onEachSide(5)->links() }}
+                    </div>
                 </div>
-                </form>
+            </div>
+
+        </div>
     @endforeach
-
-    </div>
-
-    </div>
-
 </x-app-layout>

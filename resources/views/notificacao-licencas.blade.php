@@ -31,7 +31,7 @@
         @endphp
         @foreach ($licencas as $licen)
             <div>
-                <p>{{ __('Licença - ') . $licen->numero . '/' . date('Y', strtotime($licen->data_concessao)) . ' está prestes a vencer' }}
+                <p>{{ __('Licença - ') . $licen->numero . '/' . date('Y', strtotime($licen->data_concessao)) . ' está vencida' }}
                     <a href="{{ route('licencas-view', $licen['id']) }}">
                         <button type="button" class="btn btn-link">Ver</button>
                     </a>
@@ -52,9 +52,9 @@
           @endphp
             @foreach ($condicionantes as $condi)
             <div>
-                <p>{{ __('Condicionante - ') . $condi->condicionante . ' está prestes a vencer' }}
-                    <a href="{{ route('licencas-view', $condi['id']) }}">
-                        <button type="button" class="btn btn-link">Link</button>
+                <p>{{ __('Condicionante - ') . $condi->condicionante . ' está vencida' }}
+                    <a href="{{ route('licencas-view', $condi['id_licencas']) }}">
+                        <button type="button" class="btn btn-link">Ver</button>
                     </a>
                     <hr>
                 </p>

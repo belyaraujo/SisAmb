@@ -47,7 +47,7 @@
                 @endphp
                 @foreach ($condicionantes as $condi)
                     <div>
-                        <p>{{ __('Condicionante - ') . $condi->condicionante . ' está prestes a vencer' }}
+                        <p>{{ __('Condicionante - ') . $condi->condicionante . ' está vencida' }}
                             <a href="{{ route('licencas-view', $condi['id']) }}">
                                 <button type="button" class="btn btn-link">Link</button>
                             </a>

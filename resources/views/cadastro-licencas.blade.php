@@ -82,11 +82,11 @@
                         </select>
                     </div>
                     {{-- Empreendimento --}}
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <label for="exampleFormControlTextarea1" class="form-label">Empreendimento</label>
                         <div class="form-floating ">
-                            <textarea class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
-                                id="empreendimento" name="empreendimento"></textarea>
+                            <textarea class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full" rows="4"
+                                id="empreendimento" name="empreendimento" rows="4"></textarea>
                         </div>
                     </div>
                     {{-- Data de Concessão --}}
@@ -137,11 +137,11 @@
                         </select>
                     </div>
                     {{-- Observação --}}
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <label for="exampleFormControlTextarea1" class="form-label">Observação</label>
                         <div class="form-floating ">
                             <textarea class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
-                                placeholder="Observação" id="observacao" name="observacao"></textarea>
+                                placeholder="Observação" id="observacao" name="observacao" rows="4"></textarea>
                         </div>
                     </div>
                     {{-- Arquivo da Licença --}}

@@ -25,11 +25,11 @@
     @endforeach
 
     {{-- Condicionante --}}
-    <div class="col-12">
+    <div class="col-20">
         <label for="exampleFormControlTextarea1" class="form-label">Condicionante</label>
         <div class="form-floating ">
             <textarea class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
-                id="condicionante" name="condicionante"></textarea>
+                id="condicionante" name="condicionante" rows="4"></textarea>
         </div>
     </div>
 

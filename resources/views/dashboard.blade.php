@@ -48,7 +48,7 @@
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="">
                         <table class="table-primary table-hover w-full">
-                            <thead class="table-primary p-3 bg-sky-600 shadow dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+                            <thead class="table-primary table-primary p-3 bg-sky-600  dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                                 <tr>
 
                                     <div class="p-2 bg-white border-b border-gray-200 text-white">
@@ -161,12 +161,12 @@
                                                     </a>
                                             </span>
                                         </td>
-
-
-
                                     </tr>
                                 @endforeach
                         </table>
+                        <div style="margin: 0px">
+                            {{ $licencas->onEachSide(5)->links() }}
+                        </div>
                     </div>
                 </div>
 

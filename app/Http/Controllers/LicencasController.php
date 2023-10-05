@@ -23,8 +23,7 @@ class LicencasController extends Controller
     public function index()
     {
 
-        $licencas = Licencas::get();
-       
+        $licencas = Licencas::paginate(5);
         
         return view('dashboard', ['licencas' => $licencas]);
     }
@@ -154,7 +153,7 @@ class LicencasController extends Controller
     public function licencas($id){
         $licencas = Licencas::where('id','=', $id)->get();
         $licenca = Licencas::find($id);
-        $condicionantes = Condicionantes::where('id_licencas', '=', $id)->get();
+        $condicionantes = Condicionantes::where('id_licencas', '=', $id)->paginate(5);
         return view('licencas', ['licencas'=> $licencas, 'condicionantes'=> $condicionantes]);
     }
 
