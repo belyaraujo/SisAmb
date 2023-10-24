@@ -34,7 +34,7 @@
     </div>
 
     {{-- Prazo da condicionante --}}
-    <div class="col-md-6">
+    <div class="col-md-12">
         <label for="inputCity" class="form-label">Prazo da condicionante</label>
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
             <input placeholder="Select date" type="date" id="prazo_condicionante" name="prazo_condicionante"
@@ -42,7 +42,7 @@
             <i class="fas fa-calendar input-prefix"></i>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="flex items-center justify-center mt-4">
         <br>
         <x-primary-button>{{ __('Salvar') }}</x-primary-button>
     </div>

@@ -220,12 +220,11 @@ class LicencasController extends Controller
             } else {
                 return redirect()->back()->with('error', 'O arquivo enviado não é válido.');
             }
-        $licencas->save();
 
-      
         }
+        $licencas->update();
 
-        return redirect()->route('dashboard')->with('success', 'Editado excluído com sucesso.');
+        return redirect()->route('dashboard')->with('success', 'Editado com sucesso.');
     }
     
     /**

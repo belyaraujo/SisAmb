@@ -1,23 +1,37 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Cadastro Usuário') }}
+            {{ __('Cadastrar usuário') }}
         </h2>
     </x-slot>
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    @if (session('msg'))
+        <div class="alert alert-success" role="alert" style="width: 1200px">
+            <p class="msg">
+                {{ session('msg') }}
+            </p>
+        </div>
+    @endif
 
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 ">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
 
-
-                <form action="{{ route('cadastro-user') }}" method="POST" class="row g-3">
+    <div class="pb-12 flex items-center justify-center mt-8">
+        <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 flex flex-col items-center justify-center">
+            {{-- <div class="flex flex-col items-center justify-center overflow-hidden shadow-sm sm:rounded-lg"> --}}
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900">
+                        Novo usuário
+                    </h2>
+                    <p class="mt-2 text-sm text-gray-400 pb-4">Preencha os campos abaixo para cadastrar um novo usuário.</p>
+                </div>
+                <form method="POST" action="{{ route('cadastro') }}">
                     @csrf
+                    <!-- Name -->
                     <div class="">
                         <div class="flex items-center">
                             <x-input-label for="name" :value="__('Nome')" /><i class="fa-regular fa-user pl-2"></i>
@@ -80,9 +94,13 @@
                     </div>
                 </form>
 
-
-            </div>
-
+            {{-- </div> --}}
         </div>
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     </div>
+
+
 </x-app-layout>

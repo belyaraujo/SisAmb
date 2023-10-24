@@ -49,16 +49,16 @@
     margin: 0 5px;
   }
 
-  .notification-badge {
-    position: absolute;
-    top: 40px; /* Ajuste a posição vertical conforme necessário */
-    right: 600px; /* Ajuste a posição horizontal conforme necessário */
-    background-color: red;
+  /* .notification-badge {
+    position: relative;
+    top: 50px; /* Ajuste a posição vertical conforme necessário */
+    /*right: 50px; /* Ajuste a posição horizontal conforme necessário */
+    /*background-color: red;
     color: white;
     border-radius: 50%;
     width: 17px; /* Largura da bolha de notificação */
-    height: 17px; /* Altura da bolha de notificação */
-    text-align: center;
+    /*height: 17px; /* Altura da bolha de notificação */
+    /*text-align: center;
     font-size: 12px; /* Tamanho da fonte do número de notificação */
-    line-height: 15px; /* Altura da linha igual à altura da bolha de notificação para centralização vertical */
-}
+    /*line-height: 15px; /* Altura da linha igual à altura da bolha de notificação para centralização vertical */
+/*} */

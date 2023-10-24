@@ -142,11 +142,16 @@
 
                             <div class="p-2 bg-white border-b border-gray-200">
                                 <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
-                                    scope="col">Condicionantes</th>
+                                    scope="col">Condicionantes
+                                </th>
                                 <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
-                                    scope="col">Prazo da Condicionante</th>
+                                    scope="col">Prazo da Condicionante
+                                </th>
+                                @if (Auth::check() && Auth::user()->admin == 1)
                                 <th class="w-21 p-3 text-sm font-semibold traking-wide text-left text-white"
-                                    scope="col">Editar</th>
+                                    scope="col">Editar
+                                </th>
+                                @endif
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
@@ -167,6 +172,7 @@
                                     <span class="{{ $classeCss }} p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50"
                                         value="{{ $cond->id }}">{{ date('d/m/Y', strtotime($cond->prazo_condicionante)) }}</span>
                                 </td>
+                                @if (Auth::check() && Auth::user()->admin == 1)
                                 <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                     <a
                                         href="{{ route('condicionantes-update', ['id' => $cond->id]) }}"class="text-warning">
@@ -179,6 +185,7 @@
                                         </svg>
                                     </a>
                                 </td>
+                                @endif
 
                             </tr>
                         @endforeach
