@@ -51,58 +51,27 @@ $total = $licencas + $condicionantes;
                         </x-nav-link>
                     </div>
 
-
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex position-relative">
-                        <x-nav-link class="text-white text-xl pb-4" href="#" data-bs-toggle="modal" data-bs-target="#meuModal">
-                            <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 
-                                1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 
-                                1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 
-                                0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-                                @if ($total > 0)
-                                <span class=" top-0 start-100 translate-middle badge rounded-pill bg-danger " style="font-size: 12px; padding: 5px;">
-                                 {{ ($total) }}
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
-                                @endif
-                              </svg>
-                              
-                        </x-nav-link>
-                       
-                    </div>
-
-                  
-
-                    {{-- <button type="button" class="btn btn-primary position-relative">
-                    Inbox
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      1
-                      <span class="visually-hidden">unread messages</span>
-                    </span>
-                  </button> --}}
-
-
-                    @include('notificacao-licencas')
-
-                    <!-- Modal -->
-                    {{-- Colocar no navlink data-bs-toggle="modal" data-bs-target="#meuModal" --}}
-
-                    {{-- <div class="modal fade" id="meuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">Notificações</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </div> --}}
                 @endif
+                
+                @include('notificacao-licencas')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex position-relative">
+                    <x-nav-link class="text-white text-xl pb-4" href="#" data-bs-toggle="modal" data-bs-target="#meuModal">
+                        <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 
+                            1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 
+                            1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 
+                            0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                            @if ($total > 0)
+                            <span class=" top-0 start-100 translate-middle badge rounded-pill bg-danger " style="font-size: 12px; padding: 5px;">
+                             {{ ($total) }}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                            @endif
+                          </svg>
+                          
+                    </x-nav-link>
+                   
+                </div>
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-10">
                     <x-dropdown align="right" width="48">

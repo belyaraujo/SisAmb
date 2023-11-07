@@ -6,8 +6,7 @@ use App\Http\Controllers\LicencasController;
 use App\Http\Controllers\CondicionanteController;
 use App\Http\Controllers\CadastroUsuarioController;
 use App\Http\Controllers\DownloadArquivoController;
-use App\Models\Licencas;
-use App\Models\Condicionantes;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +58,7 @@ Route::get('/cadastro-condicionantes/{id}', [CondicionanteController::class, 'in
 Route::post('/cadastro-condicionantes/{id}', [CondicionanteController::class, 'create'])->name('cadastro-condicionantes');
 Route::get('/condicionantes-update/{id}', [CondicionanteController::class, 'edit'])->name('condicionantes-update');
 Route::post('/condicionantes-update/{id}', [CondicionanteController::class, 'update'])->name('condicionantes-update');
+Route::get('/condicionantes-email', [CondicionanteController::class, 'validadecondi'])->name('condicionantes-email');
 
 
 // --------------------- Informações do perfil -----------------------

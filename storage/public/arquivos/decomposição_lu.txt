@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <math.h>
+
+void decomposicaoLU(int n, double A[][n], double L[][n], double U[][n], int Pivot[n], double *Det) {
+    int i, j, k, p;
+    double Amax, t, r, Mult;
+
+    // Inicialização das matrizes L e U
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (i == j)
+                L[i][j] = 1.0;
+            else
+                L[i][j] = 0.0;
+            U[i][j] = A[i][j];
+        }
+    }
+
+    *Det = 1.0;
+
+    // Inicialização do vetor Pivot
+    for (i = 0; i < n; i++) {
+        Pivot[i] = i;
+    }
+
+    for (j = 0; j < n - 1; j++) {
+        // Escolha do elemento pivô
+        p = j;
+        Amax = fabs(U[j][j]);
+        for (k = j + 1; k < n; k++) {
+            if (fabs(U[k][j]) > Amax) {
+                Amax = fabs(U[k][j]);
+                p = k;
+            }
+        }
+
+        if (p != j) {
+            // Troca das linhas
+            for (k = 0; k < n; k++) {
+                t = U[j][k];
+                U[j][k] = U[p][k];
+                U[p][k] = t;
+            }
+            int m = Pivot[j];
+            Pivot[j] = Pivot[p];
+            Pivot[p] = m;
+            *Det = -*Det;
+        }
+
+        if (U[j][j] != 0.0) {
+            r = 1.0 / U[j][j];
+            for (i = j + 1; i < n; i++) {
+                Mult = U[i][j] * r;
+                L[i][j] = Mult;
+                for (k = j; k < n; k++) {
+                    U[i][k] = U[i][k] - Mult * U[j][k];
+                }
+            }
+        }
+    }
+
+    *Det = *Det * U[n - 1][n - 1];
+}
+
+int main() {
+    int n = 3;
+    double A[3][3] = {{2.0, 1.0, 1.0},
+                     {4.0, 3.0, 3.0},
+                     {8.0, 7.0, 9.0}};
+
+    double L[3][3], U[3][3];
+    int Pivot[3];
+    double Det;
+
+    decomposicaoLU(n, A, L, U, Pivot, &Det);
+
+    printf("Matriz L:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%lf\t", L[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("Matriz U:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%lf\t", U[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("Vetor de Pivot:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d\t", Pivot[i]);
+    }
+    printf("\n");
+
+    printf("Determinante: %lf\n", Det);
+
+    return 0;
+}
+
+

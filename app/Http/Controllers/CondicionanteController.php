@@ -7,7 +7,6 @@ use App\Models\Licencas;
 use App\Models\Condicionantes;
 use App\Models\User;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\PrazoCondicionanteEmail;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +26,7 @@ class CondicionanteController extends Controller
      */
     public function create(Request $request)
     {
+        $user = Auth::user();
         $id = Licencas::find($request->id_licenca);
         $licencas = Licencas::find($request->id_licenca);
         $condicionantes = new Condicionantes();
@@ -36,7 +36,8 @@ class CondicionanteController extends Controller
         $condicionantes->prazo_condicionante = $request->input('prazo_condicionante');
         $condicionantes->save();
 
-        //Mail::to($user)->send(new SendMail($user));
+        //Mail::to($user)->send(new PrazoCondicionanteEmail($user, $condicionantes));
+
 
          return redirect()->route('licencas-view', ['id' => $licencas->id])->with('msg','Criado com sucesso!');
         
@@ -104,27 +105,25 @@ class CondicionanteController extends Controller
 
     public function validadecondi()
     {
-        $user = Auth::user();
         $condicionantes = Condicionantes::get();
-        
 
-        // foreach ($user as $user) {
+        foreach ($condicionantes as $condicionante) {
+            $prazo = $condicionante->prazo_condicionante;
+            $user = Auth::user();
 
-            $prazo = $condicionantes->prazo_condicionante;
             $dataAtual = now();
             $dataPrazo = Carbon::parse($prazo);
             $diasRestantes = $dataAtual->diffInDays($dataPrazo);
 
-        if ($diasRestantes <= 60) {
-            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
-        }elseif ($diasRestantes <= 30){
-            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
-        }elseif ($diasRestantes <= 15){
-            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
-        }elseif ($diasRestantes <= 2){
-            Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+            if ($diasRestantes <= 60) {
+                Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+            } elseif ($diasRestantes <= 30) {
+                Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+            } elseif ($diasRestantes <= 15) {
+                Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+            } elseif ($diasRestantes <= 2) {
+                Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo));
+            }
         }
-    //}
-    return redirect()->back();
     }
 }

@@ -12,7 +12,9 @@ use App\Models\Licencas;
 use App\Models\Vigencia;
 use App\Models\Condicionantes;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
+use App\Mail\PrazoCondicionanteEmail;
+use Illuminate\Support\Facades\Mail;
 
 
 class LicencasController extends Controller
@@ -22,11 +24,49 @@ class LicencasController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $dataAtual = now();
 
         $licencas = Licencas::paginate(5);
-        
+
+        // foreach ($licencas as $licenca) {
+        //     $prazo = $licenca->prazo_renovacao;
+        //     $dataPrazo = Carbon::parse($prazo);
+        //     $diasRestantes = $dataAtual->diffInDays($dataPrazo);
+
+
+        //     if ($diasRestantes == 60) {
+        //         Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo, $licencas));
+        //     } elseif ($diasRestantes == 30) {
+        //         Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo, $licencas));
+        //     } elseif ($diasRestantes == 15) {
+        //         Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo, $licencas));
+        //     } elseif ($diasRestantes == 2) {
+        //         Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo, $licencas));
+        //     } 
+        // }
+        $enviarParaDias = [60, 30, 15, 2]; // Dias para enviar e-mail
+        $enviados = []; // Dias para os quais os e-mails já foram enviados
+
+        foreach ($licencas as $licenca) {
+            $prazo = $licenca->prazo_renovacao;
+            $dataPrazo = Carbon::parse($prazo);
+            $diasRestantes = $dataAtual->diffInDays($dataPrazo);
+
+            // Verifica se é um dos dias para enviar e-mail
+            if (in_array($diasRestantes, $enviarParaDias) && !in_array($diasRestantes, $enviados)) {
+                // Envia e-mail
+                Mail::to($user->email)->send(new PrazoCondicionanteEmail($user, $prazo, $licenca));
+                $enviados[] = $diasRestantes; // Marca o e-mail como enviado para este intervalo de dias
+            }
+        }
+
+
+
         return view('dashboard', ['licencas' => $licencas]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +74,7 @@ class LicencasController extends Controller
     public function create(Request $request)
     {
 
-        
+
         $licencas = new Licencas();
         $licencas->id_ra = $request->input('id_ra');
         $licencas->id_situacao = $request->input('id_situacao');
@@ -53,49 +93,50 @@ class LicencasController extends Controller
         $licencas->interessado = $request->input('interessado');
         if ($request->hasFile('arquivo')) {
             $file = $request->file('arquivo');
-    
+
             // Verifique se o arquivo é válido e mova-o para o diretório de destino
             if ($file->isValid()) {
                 $extension = $file->getClientOriginalExtension();
                 $fileName = $this->generateFileName($file, $extension);
                 $file->storeAs('public/arquivos/', $fileName); // Altere para o caminho de armazenamento desejado
-    
+
                 // Salve o nome do arquivo no banco de dados
                 $licencas->arquivo = $fileName;
             } else {
                 return redirect()->back()->with('error', 'O arquivo enviado não é válido.');
             }
-        $licencas->save();
+            $licencas->save();
 
-      
+
         }
 
         // $licencas->validade = $request->input('validade');
-       
+
         // $licencas->processo = $request->input('processo');
         // $licencas->id_bacia = $request->input('id_bacia');
         // $licencas->latitude = $request->input('latitude');
         // $licencas->longitude = $request->input('longitude');
-        
-        return redirect()->route('dashboard')->with('msg','Criado com sucesso!');
+
+        return redirect()->route('dashboard')->with('msg', 'Criado com sucesso!');
 
     }
 
-    public function generateFileName($file, $extension) {
+    public function generateFileName($file, $extension)
+    {
         $timestamp = date("YmdHis");
         $originalName = $file->getClientOriginalName();
 
-        if($extension == "png") {
-            $fileName = "arquivo_".$timestamp.".".$extension;
-        } elseif($extension == "zip") {
-            $fileName = str_replace(".".$extension, "", $originalName)."_".$timestamp.".".$extension;
+        if ($extension == "png") {
+            $fileName = "arquivo_" . $timestamp . "." . $extension;
+        } elseif ($extension == "zip") {
+            $fileName = str_replace("." . $extension, "", $originalName) . "_" . $timestamp . "." . $extension;
         } else {
             $fileName = $originalName;
         }
 
         return $fileName;
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -121,7 +162,7 @@ class LicencasController extends Controller
             'arquivo' => 'required',
         ]);
 
-        
+
 
         // Licencas::create($request->all());
 
@@ -139,9 +180,9 @@ class LicencasController extends Controller
         $tipo_empre = Tipo_empreendimento::get();
         $tipo = Tipo::get();
         $vigencia = Vigencia::get();
-       
+
         return view('cadastro-licencas', [
-            'regiao' => $regiao, 
+            'regiao' => $regiao,
             'bacia' => $bacia,
             'situacao' => $situacao,
             'tipo_empre' => $tipo_empre,
@@ -150,11 +191,12 @@ class LicencasController extends Controller
         ]);
     }
 
-    public function licencas($id){
-        $licencas = Licencas::where('id','=', $id)->get();
+    public function licencas($id)
+    {
+        $licencas = Licencas::where('id', '=', $id)->get();
         $licenca = Licencas::find($id);
         $condicionantes = Condicionantes::where('id_licencas', '=', $id)->paginate(5);
-        return view('licencas', ['licencas'=> $licencas, 'condicionantes'=> $condicionantes]);
+        return view('licencas', ['licencas' => $licencas, 'condicionantes' => $condicionantes]);
     }
 
     /**
@@ -162,7 +204,7 @@ class LicencasController extends Controller
      */
     public function edit(string $id)
     {
-        $licencas = Licencas::where('id','=', $id)->get();
+        $licencas = Licencas::where('id', '=', $id)->get();
         $regiao = Regiao_administrativa::get();
         $bacia = Bacia_hidrografica::get();
         $situacao = Situacao::get();
@@ -170,16 +212,16 @@ class LicencasController extends Controller
         $tipo = Tipo::get();
         $vigencia = Vigencia::get();
 
-    
+
         return view('update-licencas', [
-            'licencas'=> $licencas,
-            'regiao' => $regiao, 
+            'licencas' => $licencas,
+            'regiao' => $regiao,
             'bacia' => $bacia,
             'situacao' => $situacao,
             'tipo_empre' => $tipo_empre,
             'tipo' => $tipo,
             'vigencia' => $vigencia,
-        
+
         ]);
     }
 
@@ -208,13 +250,13 @@ class LicencasController extends Controller
         // $licencas->update();
         if ($request->hasFile('arquivo')) {
             $file = $request->file('arquivo');
-    
+
             // Verifique se o arquivo é válido e mova-o para o diretório de destino
             if ($file->isValid()) {
                 $extension = $file->getClientOriginalExtension();
                 $fileName = $this->generateFileName($file, $extension);
                 $file->storeAs('public/arquivos/', $fileName); // Altere para o caminho de armazenamento desejado
-    
+
                 // Salve o nome do arquivo no banco de dados
                 $licencas->arquivo = $fileName;
             } else {
@@ -226,7 +268,7 @@ class LicencasController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Editado com sucesso.');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */

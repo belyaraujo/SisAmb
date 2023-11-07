@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void SubstituicoesSucessivasPivotal(int n, double L[n][n], double b[n], int Pivot[n], double y[n]) {
+    int i, j, k;
+    double Soma;
+
+    k = Pivot[0];
+    y[0] = b[k];
+
+    for (i = 1; i < n; i++) {
+        Soma = 0;
+
+        for (j = 0; j < i; j++) {
+            Soma += L[i][j] * y[j];
+        }
+
+        k = Pivot[i];
+        y[i] = b[k] - Soma;
+    }
+}
+
+int main() {
+    int n = 3; // Defina a ordem da matriz aqui
+    double (*L)[n] = malloc(n * sizeof(*L)); // Aloque dinamicamente a matriz L
+    double *b = malloc(n * sizeof(*b)); // Aloque dinamicamente o vetor b
+    int *Pivot = malloc(n * sizeof(*Pivot)); // Aloque dinamicamente o vetor Pivot
+    double y[n];
+
+    // Inicialize os valores da matriz L, vetor b e vetor Pivot aqui
+
+    // Exemplo de inicialização:
+    L[0][0] = 1.0; L[0][1] = 0.0; L[0][2] = 0.0;
+    L[1][0] = 0.5; L[1][1] = 1.0; L[1][2] = 0.0;
+    L[2][0] = 0.3; L[2][1] = 0.2; L[2][2] = 1.0;
+
+    b[0] = 1.0;
+    b[1] = 2.0;
+    b[2] = 3.0;
+
+    Pivot[0] = 0;
+    Pivot[1] = 1;
+    Pivot[2] = 2;
+
+    SubstituicoesSucessivasPivotal(n, L, b, Pivot, y);
+
+    printf("Solução do sistema triangular inferior:\n");
+    for (int i = 0; i < n; i++) {
+        printf("y[%d] = %lf\n", i, y[i]);
+    }
+
+    free(L); // Libere a memória alocada
+    free(b);
+    free(Pivot);
+
+    return 0;
+}
+
+
